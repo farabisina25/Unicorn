@@ -81,7 +81,7 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="411dp"
+        android:layout_width="fill_parent"
         android:layout_height="43dp"
         android:background="@color/material_dynamic_primary30"
         android:textColor="#F4EFEF"
@@ -145,15 +145,10 @@
 
     <ImageButton
         android:id="@+id/imageButton2"
-        android:layout_width="75dp"
-        android:layout_height="43dp"
-        android:layout_marginBottom="693dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/textView"
+        android:layout_width="72dp"
+        android:layout_height="37dp"
+        app:layout_constraintEnd_toEndOf="@+id/textView"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@android:drawable/sym_def_app_icon" />
 
     <TextView

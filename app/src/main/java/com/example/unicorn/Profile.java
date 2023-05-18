@@ -129,14 +129,14 @@ public class Profile extends AppCompatActivity {
                 if (isProfileCreated = false) {
                     setDescription(editText1.getText().toString());
                     setNameSurname(editText2.getText().toString());
-                    setDepartment(editText3.getText().toString());
-                    setHometown(editText4.getText().toString());
+                    setBirth(editText3.getText().toString());
+                    setDepartment(editText4.getText().toString());
 
                     Map<String,Object> profile = new HashMap<>();
                     profile.put("Description" , Description);
                     profile.put("NameLastname" , NameSurname);
-                    profile.put("Department" , Department);
-                    profile.put("HomeTown" , Hometown);
+                    profile.put("Birth" , Department);
+                    profile.put("Department" , Hometown);
 
                     firestore.collection("Profiles").add(profile);
                     isProfileCreated = true;
@@ -144,8 +144,8 @@ public class Profile extends AppCompatActivity {
                 else{
                     setDescription(editText1.getText().toString());
                     setNameSurname(editText2.getText().toString());
-                    setDepartment(editText3.getText().toString());
-                    setHometown(editText4.getText().toString());
+                    setBirth(editText3.getText().toString());
+                    setDepartment(editText4.getText().toString());
                 }
             }
         });
@@ -185,10 +185,6 @@ public class Profile extends AppCompatActivity {
 
     public void setDepartment(String x){
         Department = x;
-    }
-
-    public void setHometown(String x){
-        Hometown = x;
     }
 
     public void showProfile(){
