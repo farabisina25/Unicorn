@@ -45,7 +45,10 @@ public class MainActivity extends AppCompatActivity {
             finish();
         }
         else{
-            textView.setText(user.getEmail());
+            //textView.setText(user.getEmail());
+            Intent intent = new Intent(getApplicationContext() , Profile.class);
+            startActivity(intent);
+            finish();
         }
 
         button.setOnClickListener(new View.OnClickListener() {

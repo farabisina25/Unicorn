@@ -11,9 +11,21 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Profile extends AppCompatActivity {
 
+    FirebaseFirestore firestore;
     String Description;
     String NameSurname;
     String BirthDate;
@@ -39,12 +51,15 @@ public class Profile extends AppCompatActivity {
     Button button6;
     ImageButton homepagebutton;
 
+    Boolean isProfileCreated;
+
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        firestore = FirebaseFirestore.getInstance();
         imageview = findViewById(R.id.imageView);
         textview1 = findViewById(R.id.textView1);
         textview2 = findViewById(R.id.textView2);
@@ -61,6 +76,15 @@ public class Profile extends AppCompatActivity {
         button5 = findViewById(R.id.button5);
         button6 = findViewById(R.id.button6);
         homepagebutton  =findViewById(R.id.imageButton);
+        isProfileCreated = false;
+
+        if(isProfileCreated){
+            button5.setText("Save");
+            editText1.setText(Description);
+            editText2.setText(NameSurname);
+            editText3.setText(Department);
+            editText4.setText(Hometown);
+        }
 
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,10 +125,27 @@ public class Profile extends AppCompatActivity {
         button5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setDescription(editText1.getText().toString());
-                setNameSurname(editText2.getText().toString());
-                setDepartment(editText3.getText().toString());
-                setHometown(editText4.getText().toString());
+                if (isProfileCreated = false) {
+                    setDescription(editText1.getText().toString());
+                    setNameSurname(editText2.getText().toString());
+                    setDepartment(editText3.getText().toString());
+                    setHometown(editText4.getText().toString());
+
+                    Map<String,Object> profile = new HashMap<>();
+                    profile.put("Description" , Description);
+                    profile.put("NameLastname" , NameSurname);
+                    profile.put("Department" , Department);
+                    profile.put("HomeTown" , Hometown);
+
+                    firestore.collection("Profiles").add(profile);
+                    isProfileCreated = true;
+                }
+                else{
+                    setDescription(editText1.getText().toString());
+                    setNameSurname(editText2.getText().toString());
+                    setDepartment(editText3.getText().toString());
+                    setHometown(editText4.getText().toString());
+                }
             }
         });
 
