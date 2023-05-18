@@ -22,7 +22,6 @@ public class HomePage extends AppCompatActivity {
     Button button7;
     Button button8;
     Button button9;
-    Button button10;
     Button button11;
     Button button12;
     Button button13;
@@ -43,7 +42,6 @@ public class HomePage extends AppCompatActivity {
         button7 = findViewById(R.id.button7);
         button8 = findViewById(R.id.button8);
         button9 = findViewById(R.id.button9);
-        button10 = findViewById(R.id.button10);
         button11 = findViewById(R.id.button11);
         button12 = findViewById(R.id.button12);
         button13 = findViewById(R.id.button13);
@@ -75,14 +73,7 @@ public class HomePage extends AppCompatActivity {
             }
         });
 
-        button10.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext() , EventsSubmenu.class);
-                startActivity(intent);
-                finish();
-            }
-        });
+
 
         button11.setOnClickListener(new View.OnClickListener() {
             @Override

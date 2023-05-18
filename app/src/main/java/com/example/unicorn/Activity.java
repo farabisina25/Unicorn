@@ -17,7 +17,6 @@ import java.util.Map;
 
 public class Activity extends AppCompatActivity {
 
-    //Comment
     FirebaseFirestore firestore;
     private String name;
     private String place;
@@ -50,13 +49,13 @@ public class Activity extends AppCompatActivity {
                 setPlace(editText7.getText().toString());
                 setDescription(editText8.getText().toString());
 
-                Map<String,Object> profile = new HashMap<>();
-                profile.put("Name" , name);
-                profile.put("Date" , date);
-                profile.put("Place" , place);
-                profile.put("Description" , description);
+                Map<String,Object> activity = new HashMap<>();
+                activity.put("Name" , name);
+                activity.put("Date" , date);
+                activity.put("Place" , place);
+                activity.put("Description" , description);
 
-                firestore.collection("Activities").add(profile);
+               firestore.collection("Activities").add(activity);
             }
         });
     }
