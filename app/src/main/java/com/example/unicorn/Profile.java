@@ -60,7 +60,9 @@ public class Profile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
         firestore = FirebaseFirestore.getInstance();
+
         imageview = findViewById(R.id.imageView);
         textview1 = findViewById(R.id.textView1);
         textview2 = findViewById(R.id.textView2);
@@ -77,15 +79,6 @@ public class Profile extends AppCompatActivity {
         button5 = findViewById(R.id.button5);
         button6 = findViewById(R.id.button6);
         homepagebutton  =findViewById(R.id.imageButton);
-        isProfileCreated = false;
-
-        if(isProfileCreated){
-            button5.setText("Save");
-            editText1.setText(Description);
-            editText2.setText(NameSurname);
-            editText3.setText(Department);
-            editText4.setText(Hometown);
-        }
 
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,7 +119,6 @@ public class Profile extends AppCompatActivity {
         button5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isProfileCreated = false) {
                     setDescription(editText1.getText().toString());
                     setNameSurname(editText2.getText().toString());
                     setBirth(editText3.getText().toString());
@@ -140,13 +132,6 @@ public class Profile extends AppCompatActivity {
 
                     firestore.collection("Profiles").add(profile);
                     isProfileCreated = true;
-                }
-                else{
-                    setDescription(editText1.getText().toString());
-                    setNameSurname(editText2.getText().toString());
-                    setBirth(editText3.getText().toString());
-                    setDepartment(editText4.getText().toString());
-                }
             }
         });
 

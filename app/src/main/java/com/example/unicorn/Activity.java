@@ -39,6 +39,7 @@ public class Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activities);
+
         firestore = FirebaseFirestore.getInstance();
 
         buttonCreate.setOnClickListener(new View.OnClickListener() {
@@ -50,12 +51,12 @@ public class Activity extends AppCompatActivity {
                 setDescription(editText8.getText().toString());
 
                 Map<String,Object> activity = new HashMap<>();
-                activity.put("Name" , name);
-                activity.put("Date" , date);
-                activity.put("Place" , place);
-                activity.put("Description" , description);
+                activity.put("Name",name);
+                activity.put("Date",date);
+                activity.put("Place",place);
+                activity.put("Description",description);
 
-               firestore.collection("Activities").add(activity);
+                firestore.collection("Activities").add(activity);
             }
         });
     }
