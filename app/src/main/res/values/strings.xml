@@ -8,4 +8,17 @@
     <string name="click_to_login">Click to login</string>
     <string name="click_to_register">Click to register</string>
     <string name="logout">logout</string>
+    <string name="name_surname"><![CDATA[Name & Surname]]></string>
+    <string name="upload_image">Upload Image</string>
+    <string name="create">Create</string>
+    <string name="events">Events</string>
+    <string name="interests">Interests</string>
+    <string name="books">Books</string>
+    <string name="roommates">Roommates</string>
+    <string name="birth_date">Birth Date</string>
+    <string name="grade">Grade</string>
+    <string name="depatment">Depatment</string>
+    <string name="write_a_brief_description">Write a Brief Description</string>
+    <string name="department">department</string>
+    <string name="Department">Department</string>
 </resources>
