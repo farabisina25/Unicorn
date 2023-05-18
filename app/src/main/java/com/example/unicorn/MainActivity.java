@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Map<String,Object> user = new HashMap<>();
+        /*Map<String,Object> user = new HashMap<>();
         user.put("firstname" , "Merve");
         user.put("lastname" , "Gul-ec");
         user.put("description" , "Sub");
@@ -74,6 +74,6 @@ public class MainActivity extends AppCompatActivity {
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(getApplicationContext(), "Failure", Toast.LENGTH_LONG).show();
             }
-        });
+        });*/
     }
 }
