@@ -12,5 +12,47 @@ public class RoommatesInfo extends AppCompatActivity {
         setContentView(R.layout.activity_roommates_info);
     }
 
+    public void setGender(){
 
+    }
+
+    public void setCampus(){
+
+    }
+
+    public void setWorkplace(){
+
+    }
+
+    public void setSmoke(){
+
+    }
+
+    public void setCook(){
+
+    }
+
+    public void setInstrument(){
+
+    }
+
+    public void setSleepLight(){
+
+    }
+
+    public void RoommateCount(){
+
+    }
+
+    public void SleepTime(){
+        //Aralıklı Saatler Yazılacak ve Seçilecek
+    }
+
+    public void getUpTime(){
+
+    }
+
+    public void uploadSchedule(){
+
+    }
 }
