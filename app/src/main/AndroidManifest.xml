@@ -33,7 +33,7 @@
             android:name=".HomePage"
             android:exported="false" />
         <activity
-            android:name=".Activities"
+            android:name=".Activity"
             android:exported="false" />
         <activity
             android:name=".Interests"
