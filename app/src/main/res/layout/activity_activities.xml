@@ -51,7 +51,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
-        android:id="@+id/editTextText"
+        android:id="@+id/editText5"
         android:layout_width="357dp"
         android:layout_height="44dp"
         android:layout_marginTop="20dp"
@@ -73,10 +73,10 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText" />
+        app:layout_constraintTop_toBottomOf="@+id/editText5" />
 
     <EditText
-        android:id="@+id/editTextText5"
+        android:id="@+id/editText6"
         android:layout_width="357dp"
         android:layout_height="44dp"
         android:layout_marginTop="20dp"
@@ -98,10 +98,10 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText5" />
+        app:layout_constraintTop_toBottomOf="@+id/editText6" />
 
     <EditText
-        android:id="@+id/editTextText8"
+        android:id="@+id/editText7"
         android:layout_width="357dp"
         android:layout_height="44dp"
         android:layout_marginTop="20dp"
@@ -123,10 +123,10 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText8" />
+        app:layout_constraintTop_toBottomOf="@+id/editText7" />
 
     <EditText
-        android:id="@+id/editTextText9"
+        android:id="@+id/editText8"
         android:layout_width="357dp"
         android:layout_height="44dp"
         android:layout_marginTop="20dp"
@@ -148,7 +148,7 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText9" />
+        app:layout_constraintTop_toBottomOf="@+id/editText8" />
 
     <RadioButton
         android:id="@+id/radioButton17"
@@ -181,7 +181,7 @@
         app:layout_constraintTop_toBottomOf="@+id/radioButton18" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/buttonCreate"
         style="@style/Widget.Material3.Button"
         android:layout_width="109dp"
         android:layout_height="94dp"
@@ -193,6 +193,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/radioButton18"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText9" />
+        app:layout_constraintTop_toBottomOf="@+id/editText8" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
