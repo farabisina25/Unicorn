@@ -2,13 +2,14 @@ package com.example.unicorn;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
-import android.widget.TextView;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -18,23 +19,25 @@ import java.util.Map;
 public class Activity extends AppCompatActivity {
 
     FirebaseFirestore firestore;
-    private String name;
-    private String place;
-    private String date;
-    private String description;
+    String name;
+    String place;
+    String date;
+    String description;
+    String type;
 
-    private ImageButton imagebutton2;
-    private Button buttonCreate;
-    private EditText editText5;
-    private EditText editText6;
-    private EditText editText7;
-    private EditText editText8;
-    private RadioButton radioButton17;
-    private RadioButton radioButton18;
-    private RadioButton radioButton19;
+    ImageButton imagebutton2;
+    Button buttonCreate;
+    EditText editText5;
+    EditText editText6;
+    EditText editText7;
+    EditText editText8;
+    RadioButton radioButton17;
+    RadioButton radioButton18;
+    RadioButton radioButton19;
 
 
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +45,15 @@ public class Activity extends AppCompatActivity {
 
         firestore = FirebaseFirestore.getInstance();
 
+        imagebutton2 = findViewById(R.id.profileBtn2);
+        buttonCreate = findViewById(R.id.buttonCreate);
+        editText5 = findViewById(R.id.editText5);
+        editText6 = findViewById(R.id.editText6);
+        editText7 = findViewById(R.id.editText7);
+        editText8 = findViewById(R.id.editText9);
+        radioButton17  =findViewById(R.id.radioButton17);
+        radioButton18  =findViewById(R.id.radioButton18);
+        radioButton19  =findViewById(R.id.radioButton19);
         buttonCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,22 +61,28 @@ public class Activity extends AppCompatActivity {
                 setDate(editText6.getText().toString());
                 setPlace(editText7.getText().toString());
                 setDescription(editText8.getText().toString());
+                setType();
 
-                Map<String,Object> activity = new HashMap<>();
-                activity.put("Name",name);
-                activity.put("Date",date);
-                activity.put("Place",place);
-                activity.put("Description",description);
+                Map<String, Object> activity = new HashMap<>();
+                activity.put("Name", name);
+                activity.put("Date", date);
+                activity.put("Place", place);
+                activity.put("Description", description);
+                activity.put("Type" , type);
 
                 firestore.collection("Activities").add(activity);
             }
         });
+
+        imagebutton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext() , Profile.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
-
-    public void setType(){
-
-    }
-
     public void setName(String x){
         name = x;
     }
@@ -79,5 +97,19 @@ public class Activity extends AppCompatActivity {
 
     public void setDate(String x){
         date = x;
+    }
+
+    public void setType(){
+        String x = "";
+        if(radioButton17.callOnClick()){
+            x = "Concert";
+        }
+        else if(radioButton18.callOnClick()){
+            x = "Theatre";
+        }
+        else{
+            x = "Party/Festival";
+        }
+        type  = x;
     }
 }

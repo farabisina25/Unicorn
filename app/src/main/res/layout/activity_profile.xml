@@ -22,7 +22,7 @@
         tools:srcCompat="@android:drawable/ic_menu_gallery" />
 
     <EditText
-        android:id="@+id/editTextText1"
+        android:id="@+id/editText1"
         android:layout_width="205dp"
         android:layout_height="45dp"
         android:layout_marginTop="30dp"
@@ -33,7 +33,7 @@
         tools:layout_editor_absoluteX="31dp" />
 
     <EditText
-        android:id="@+id/editTextText2"
+        android:id="@+id/editText2"
         android:layout_width="205dp"
         android:layout_height="45dp"
         android:layout_marginTop="30dp"
@@ -44,7 +44,7 @@
         tools:layout_editor_absoluteX="31dp" />
 
     <EditText
-        android:id="@+id/editTextText3"
+        android:id="@+id/editText3"
         android:layout_width="205dp"
         android:layout_height="45dp"
         android:layout_marginTop="30dp"
@@ -53,6 +53,31 @@
         app:layout_constraintTop_toBottomOf="@+id/textView3"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="31dp" />
+
+    <EditText
+        android:id="@+id/editText4"
+        android:layout_width="205dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="30dp"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="32dp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="209dp"
+        android:layout_height="27dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/birth_date"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/editText2"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="31dp" />
+
 
     <TextView
         android:id="@+id/textView1"
@@ -78,20 +103,7 @@
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText1"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="31dp" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="209dp"
-        android:layout_height="27dp"
-        android:layout_marginTop="30dp"
-        android:text="@string/birth_date"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText2"
+        app:layout_constraintTop_toBottomOf="@+id/editText1"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="31dp" />
 
@@ -104,20 +116,9 @@
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText3"
+        app:layout_constraintTop_toBottomOf="@+id/editText3"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="31dp" />
-
-    <EditText
-        android:id="@+id/editTextText4"
-        android:layout_width="205dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="30dp"
-        android:ems="10"
-        android:inputType="text"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="32dp" />
 
     <ImageButton
         android:id="@+id/imageButton"

@@ -11,14 +11,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,8 +25,6 @@ public class Profile extends AppCompatActivity {
     String NameSurname;
     String BirthDate;
     String Department;
-    String Hometown;
-
     ImageView imageview;
     TextView textview1;
     TextView textview2;
@@ -52,9 +44,6 @@ public class Profile extends AppCompatActivity {
     Button button6;
     ImageButton homepagebutton;
 
-    Boolean isProfileCreated;
-
-
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,10 +57,12 @@ public class Profile extends AppCompatActivity {
         textview2 = findViewById(R.id.textView2);
         textview3 = findViewById(R.id.textView3);
         textview4 = findViewById(R.id.textView4);
-        editText1 = findViewById(R.id.editTextText1);
-        editText2 = findViewById(R.id.editTextText2);
-        editText3 = findViewById(R.id.editTextText3);
-        editText4 = findViewById(R.id.editTextText4);
+
+        editText1 = findViewById(R.id.editText1);
+        editText2 = findViewById(R.id.editText2);
+        editText3 = findViewById(R.id.editText3);
+        editText4 = findViewById(R.id.editText4);
+
         button1 = findViewById(R.id.button1);
         button2 = findViewById(R.id.button2);
         button3 = findViewById(R.id.button3);
@@ -127,11 +118,10 @@ public class Profile extends AppCompatActivity {
                     Map<String,Object> profile = new HashMap<>();
                     profile.put("Description" , Description);
                     profile.put("NameLastname" , NameSurname);
-                    profile.put("Birth" , Department);
-                    profile.put("Department" , Hometown);
+                    profile.put("Birth" , BirthDate);
+                    profile.put("Department" , Department);
 
                     firestore.collection("Profiles").add(profile);
-                    isProfileCreated = true;
             }
         });
 
