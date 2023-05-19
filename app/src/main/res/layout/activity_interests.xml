@@ -22,44 +22,46 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="116dp"
+        android:layout_marginTop="31dp"
         android:text="Your favorite types of music:"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textView16"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
         android:id="@+id/textView16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="116dp"
+        android:layout_marginTop="33dp"
         android:text="Sports you do:"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textView18"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mactv1" />
 
     <TextView
         android:id="@+id/textView18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="116dp"
+        android:layout_marginTop="30dp"
         android:text="Your favorite types of books:"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textView19"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mactv2" />
 
     <TextView
         android:id="@+id/textView19"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="205dp"
+        android:layout_marginTop="34dp"
+        android:layout_marginBottom="296dp"
         android:text="Clubs you joined at school:"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mactv3" />
 
     <TextView
         android:id="@+id/textView20"
@@ -93,7 +95,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
     <MultiAutoCompleteTextView
-        android:id="@+id/multiAutoCompleteTextView2"
+        android:id="@+id/mactv2"
         android:layout_width="260dp"
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
@@ -103,7 +105,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
     <MultiAutoCompleteTextView
-        android:id="@+id/multiAutoCompleteTextView3"
+        android:id="@+id/mactv3"
         android:layout_width="260dp"
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
@@ -113,7 +115,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
     <MultiAutoCompleteTextView
-        android:id="@+id/multiAutoCompleteTextView4"
+        android:id="@+id/mactv4"
         android:layout_width="260dp"
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
@@ -127,8 +129,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="28dp"
-        android:layout_marginBottom="81dp"
-        android:text="Button"
+        android:layout_marginBottom="67dp"
+        android:text="Save"
         app:layout_constraintBottom_toTopOf="@+id/button16"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -136,9 +138,9 @@
         android:id="@+id/button16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="28dp"
-        android:layout_marginBottom="88dp"
-        android:text="Button"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="67dp"
+        android:text="Save"
         app:layout_constraintBottom_toTopOf="@+id/button17"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -146,9 +148,9 @@
         android:id="@+id/button17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="28dp"
-        android:layout_marginBottom="88dp"
-        android:text="Button"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="67dp"
+        android:text="Save"
         app:layout_constraintBottom_toTopOf="@+id/button18"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -156,9 +158,9 @@
         android:id="@+id/button18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="28dp"
-        android:layout_marginBottom="182dp"
-        android:text="Button"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="272dp"
+        android:text="Save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

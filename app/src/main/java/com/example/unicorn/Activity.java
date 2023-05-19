@@ -83,6 +83,7 @@ public class Activity extends AppCompatActivity {
             }
         });
     }
+
     public void setName(String x){
         name = x;
     }
