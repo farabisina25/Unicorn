@@ -1,5 +1,6 @@
 package com.example.unicorn;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,6 +15,14 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -24,10 +33,16 @@ public class Profile extends AppCompatActivity {
     //Comment
     private final int GALLERY_REC_CODE = 1000;
     FirebaseFirestore firestore;
+    FirebaseAuth mAuth;
+    FirebaseUser user;
+    DatabaseReference reference;
+    Query checkUser;
+    String Email;
     String Description;
     String NameSurname;
     String BirthDate;
     String Department;
+
     ImageView imageview;
     TextView textview1;
     TextView textview2;
@@ -46,6 +61,8 @@ public class Profile extends AppCompatActivity {
     Button button5;
     Button button6;
     ImageButton homepagebutton;
+    String emailFromDB;
+
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -54,6 +71,11 @@ public class Profile extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         firestore = FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
+        reference = FirebaseDatabase.getInstance().getReference("Profiles");
+
+        Email = user.getEmail();
 
         imageview = findViewById(R.id.imageView);
         textview1 = findViewById(R.id.textView1);
@@ -119,6 +141,7 @@ public class Profile extends AppCompatActivity {
                     setDepartment(editText4.getText().toString());
 
                     Map<String,Object> profile = new HashMap<>();
+                    profile.put("Email" , Email);
                     profile.put("Description" , Description);
                     profile.put("NameLastname" , NameSurname);
                     profile.put("Birth" , BirthDate);
@@ -156,6 +179,35 @@ public class Profile extends AppCompatActivity {
                 imageview.setImageURI(data.getData());
             }
         }
+    }
+
+    public void isProfileCreated(){
+        checkUser = reference.orderByChild("Email").equalTo(Email);
+        checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    emailFromDB = snapshot.child(Email).child("Email").getValue(String.class);
+                    if(emailFromDB.equals(Email)){
+                        Email = emailFromDB;
+                        Description = snapshot.child(Email).child("Description").getValue(String.class);
+                        NameSurname = snapshot.child(Email).child("NameSurname").getValue(String.class);
+                        BirthDate = snapshot.child(Email).child("BirthDate").getValue(String.class);
+                        Department = snapshot.child(Email).child("Department").getValue(String.class);
+                        Intent intent = new Intent(getApplicationContext() , HomePage.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                    emailFromDB = null;
+            }
+
+        });
     }
     public void setDescription(String x){
         Description = x;
