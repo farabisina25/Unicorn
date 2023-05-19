@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -65,6 +66,9 @@ public class HomePage extends AppCompatActivity {
     TextView actText3;
     TextView actText4;
     Object[] acttexts;
+
+    RadioButton rb1;
+    RadioButton rb2;
     int i;
     @SuppressLint("MissingInflatedId")
     @Override
@@ -136,53 +140,61 @@ public class HomePage extends AppCompatActivity {
         activities[2] = activity3;
         activities[3] = activity4;
 
-        firestore.collection("Profiles")
-                .whereNotEqualTo("ID", user.getUid())
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            i = 0;
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                if(i < 4){
-                                    docRef = firestore.collection("Profiles").document(document.getId());
-                                    docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                                        @Override
-                                        public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                            if(documentSnapshot.exists()){
-                                                String name = documentSnapshot.getData().get("NameLastname").toString();
-                                                ((TextView)textFields[i]).setText(name);
-                                                ((ImageButton)imageButtons[i]).setVisibility(View.VISIBLE);
-                                                i++;
-                                            }
-                                        }
-                                    });
+        docRef2 = firestore.collection("Profiles").document(user.getUid());
+        docRef2.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if(documentSnapshot.exists()){
+                    textView16.setText(documentSnapshot.getData().get("NameLastname").toString());
+                }
+            }
+        });
+        textView17.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setProfiles();
+            }
+        });
 
-                                }
-                            }
-                        }
-                    }
-                });
+        textView19.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setActivities();
+            }
+        });
 
-        /*firestore.collection("Activities")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            i = 0;
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                if(i < 4){
-                                    String name = document.getData().get("Name").toString();
-                                    ((TextView)acttexts[i]).setText("name");
-                                    ((ImageButton)activities[i]).setVisibility(View.VISIBLE);
-                                    i++;
-                                }
-                            }
-                        }
-                    }
-                });*/
+        activity1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext() , EventsSubmenu.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+        activity2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext() , EventsSubmenu.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+        activity3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext() , EventsSubmenu.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+        activity4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext() , EventsSubmenu.class);
+                startActivity(intent);
+                finish();
+            }
+        });
         Profile1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -246,8 +258,6 @@ public class HomePage extends AppCompatActivity {
             }
         });
 
-
-
         button11.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -287,20 +297,55 @@ public class HomePage extends AppCompatActivity {
         });
 
     }
+    public void setProfiles(){
+        firestore.collection("Profiles")
+                .whereNotEqualTo("ID", user.getUid())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            i = 0;
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                if(i < 4){
+                                    docRef = firestore.collection("Profiles").document(document.getId());
+                                    docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                        @Override
+                                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                            if(documentSnapshot.exists()){
+                                                String name = documentSnapshot.getData().get("NameLastname").toString();
+                                                ((TextView)textFields[i]).setText(name);
+                                                ((ImageButton)imageButtons[i]).setVisibility(View.VISIBLE);
+                                                i++;
+                                            }
+                                        }
+                                    });
 
-    public Profile getUser(){
-        return null;
+                                }
+                            }
+                        }
+                    }
+                });
     }
 
-    public Activity getActivity(){
-        return null;
-    }
-
-    public void chooseType(){
-
-    }
-
-    public void matchPeople(){
-
+    public void setActivities(){
+        firestore.collection("Activities")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            i = 0;
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                if(i < 4){
+                                    String name = document.getData().get("Name").toString();
+                                    ((TextView)acttexts[i]).setText(name);
+                                    ((ImageButton)activities[i]).setVisibility(View.VISIBLE);
+                                    i++;
+                                }
+                            }
+                        }
+                    }
+                });
     }
 }

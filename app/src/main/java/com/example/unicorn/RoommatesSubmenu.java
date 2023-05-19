@@ -18,7 +18,7 @@ public class RoommatesSubmenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_roommates_submenu);
 
-        homepagebutton = findViewById(R.id.imageButton2);
+        homepagebutton = findViewById(R.id.homeBtn);
 
         homepagebutton.setOnClickListener(new View.OnClickListener() {
             @Override

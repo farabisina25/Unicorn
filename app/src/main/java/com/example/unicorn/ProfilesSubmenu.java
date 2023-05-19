@@ -19,7 +19,7 @@ public class ProfilesSubmenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profiles_submenu);
 
-        homeBtn = findViewById(R.id.imageButton2);
+        homeBtn = findViewById(R.id.homeBtn);
         searchBtn = findViewById(R.id.button10);
         actextView = findViewById(R.id.autoCompleteTextView);
 

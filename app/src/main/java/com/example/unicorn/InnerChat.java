@@ -15,7 +15,7 @@ public class InnerChat extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inner_chat);
 
-        homepagebutton = findViewById(R.id.imageButton2);
+        homepagebutton = findViewById(R.id.homeBtn);
         returnTextBtn = findViewById(R.id.imageButton9);
 
         homepagebutton.setOnClickListener(new View.OnClickListener() {
