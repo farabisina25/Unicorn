@@ -166,7 +166,6 @@ public class HomePage extends AppCompatActivity {
                 });
 
         /*firestore.collection("Activities")
-                .whereNotEqualTo("Name", null)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -175,19 +174,10 @@ public class HomePage extends AppCompatActivity {
                             i = 0;
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 if(i < 4){
-                                    docRef2 = firestore.collection("Activities").document(document.getId());
-                                    docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                                        @Override
-                                        public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                            if(documentSnapshot.exists()){
-                                                String name = documentSnapshot.getData().get("Name").toString();
-                                                ((TextView)acttexts[i]).setText(name);
-                                                ((ImageButton)activities[i]).setVisibility(View.VISIBLE);
-                                                i++;
-                                            }
-                                        }
-                                    });
-
+                                    String name = document.getData().get("Name").toString();
+                                    ((TextView)acttexts[i]).setText("name");
+                                    ((ImageButton)activities[i]).setVisibility(View.VISIBLE);
+                                    i++;
                                 }
                             }
                         }
