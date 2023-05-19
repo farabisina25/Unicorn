@@ -6,4 +6,88 @@
     android:layout_height="match_parent"
     tools:context=".EventsSubmenu">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#EAE1E1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:context=".BookSubmenu">
+
+        <TextView
+            android:id="@+id/textView27"
+            android:layout_width="fill_parent"
+            android:layout_height="43dp"
+            android:background="@color/material_dynamic_primary30"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView28"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:text="Activities"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/textView27"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView34"
+            android:layout_width="355dp"
+            android:layout_height="551dp"
+            android:layout_marginStart="27dp"
+            android:layout_marginEnd="27dp"
+            android:layout_marginBottom="32dp"
+            android:background="#CFC2C2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageButton
+            android:id="@+id/imageButton2"
+            android:layout_width="51dp"
+            android:layout_height="43dp"
+            android:background="@drawable/home_circle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RadioButton
+            android:id="@+id/radioButton"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:text="Concert"
+            tools:layout_editor_absoluteX="10dp"
+            tools:layout_editor_absoluteY="95dp" />
+
+        <RadioButton
+            android:id="@+id/radioButton3"
+            android:layout_width="112dp"
+            android:layout_height="28dp"
+            android:text="Theatre"
+            tools:layout_editor_absoluteX="130dp"
+            tools:layout_editor_absoluteY="95dp" />
+
+        <RadioButton
+            android:id="@+id/radioButton4"
+            android:layout_width="134dp"
+            android:layout_height="28dp"
+            android:text="Party/Festival"
+            tools:layout_editor_absoluteX="261dp"
+            tools:layout_editor_absoluteY="97dp" />
+
+        <TextView
+            android:id="@+id/textView30"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Type of the Event:"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="67dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
