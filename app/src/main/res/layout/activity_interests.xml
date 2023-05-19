@@ -7,78 +7,6 @@
     android:background="#EAE1E1"
     tools:context=".Interests">
 
-    <ScrollView
-        android:id="@+id/scrollView4"
-        android:layout_width="129dp"
-        android:layout_height="56dp"
-        android:layout_marginEnd="44dp"
-        android:layout_marginBottom="50dp"
-        android:background="#DCC0C0"
-        android:scrollbarThumbHorizontal="@color/black"
-        android:scrollbarThumbVertical="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView5"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </ScrollView>
-
-    <ScrollView
-        android:id="@+id/scrollView3"
-        android:layout_width="129dp"
-        android:layout_height="56dp"
-        android:layout_marginEnd="44dp"
-        android:layout_marginBottom="50dp"
-        android:background="#DCC0C0"
-        android:scrollbarThumbHorizontal="@color/black"
-        android:scrollbarThumbVertical="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView4"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </ScrollView>
-
-    <ScrollView
-        android:id="@+id/scrollView1"
-        android:layout_width="129dp"
-        android:layout_height="56dp"
-        android:layout_marginEnd="44dp"
-        android:layout_marginBottom="50dp"
-        android:background="#DCC0C0"
-        android:scrollbarThumbHorizontal="@color/black"
-        android:scrollbarThumbVertical="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </ScrollView>
-
-    <ScrollView
-        android:id="@+id/scrollView2"
-        android:layout_width="129dp"
-        android:layout_height="56dp"
-        android:layout_marginEnd="44dp"
-        android:layout_marginBottom="50dp"
-        android:background="#DCC0C0"
-        android:scrollbarThumbHorizontal="@color/black"
-        android:scrollbarThumbVertical="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView3"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </ScrollView>
-
     <TextView
         android:id="@+id/textView"
         android:layout_width="fill_parent"
@@ -87,14 +15,14 @@
         android:textColor="#F4EFEF"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="-5dp" />
+        tools:layout_editor_absoluteY="0dp" />
 
     <TextView
         android:id="@+id/textView15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="92dp"
+        android:layout_marginBottom="116dp"
         android:text="Your favorite types of music:"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textView16"
@@ -105,19 +33,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="92dp"
+        android:layout_marginBottom="116dp"
         android:text="Sports you do:"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textView17"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textView17"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="92dp"
-        android:text="Courses you attend at school:"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textView18"
         app:layout_constraintStart_toStartOf="parent" />
@@ -127,7 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="92dp"
+        android:layout_marginBottom="116dp"
         android:text="Your favorite types of books:"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textView19"
@@ -157,24 +74,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ScrollView
-        android:id="@+id/scrollView5"
-        android:layout_width="129dp"
-        android:layout_height="56dp"
-        android:layout_marginEnd="44dp"
-        android:layout_marginBottom="190dp"
-        android:background="#DCC0C0"
-        android:scrollbarThumbHorizontal="@color/black"
-        android:scrollbarThumbVertical="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </ScrollView>
-
     <ImageButton
         android:id="@+id/imageButton10"
         android:layout_width="41dp"
@@ -182,5 +81,85 @@
         android:background="@drawable/account_circle"
         app:layout_constraintEnd_toEndOf="@+id/textView"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <MultiAutoCompleteTextView
+        android:id="@+id/mactv1"
+        android:layout_width="260dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="22dp"
+        android:hint="@string/mactv1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+    <MultiAutoCompleteTextView
+        android:id="@+id/multiAutoCompleteTextView2"
+        android:layout_width="260dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="22dp"
+        android:hint="@string/mactv2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+    <MultiAutoCompleteTextView
+        android:id="@+id/multiAutoCompleteTextView3"
+        android:layout_width="260dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="22dp"
+        android:hint="@string/mactv3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView18" />
+
+    <MultiAutoCompleteTextView
+        android:id="@+id/multiAutoCompleteTextView4"
+        android:layout_width="260dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="22dp"
+        android:hint="@string/mactv4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView19" />
+
+    <Button
+        android:id="@+id/button15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="81dp"
+        android:text="Button"
+        app:layout_constraintBottom_toTopOf="@+id/button16"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/button16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="88dp"
+        android:text="Button"
+        app:layout_constraintBottom_toTopOf="@+id/button17"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/button17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="88dp"
+        android:text="Button"
+        app:layout_constraintBottom_toTopOf="@+id/button18"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/button18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="182dp"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
