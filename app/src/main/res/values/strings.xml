@@ -53,4 +53,9 @@
     <string name="man">Man</string>
     <string name="gender">Gender:</string>
     <string name="roommates1">ROOMMATES</string>
+    <string name="mactv1">Music Types</string>
+    <string name="mactv2">Sports</string>
+    <string name="mactv3">Books</string>
+    <string name="mactv4">Clubs</string>
+
 </resources>
