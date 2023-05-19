@@ -1,15 +1,18 @@
 package com.example.unicorn;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -19,13 +22,14 @@ import java.util.Map;
 
 public class BookInfo extends AppCompatActivity {
     FirebaseFirestore firestore;
+    private final int GALLERY_REC_CODE = 1000;
     String course;
     String name;
     String author;
     String price;
     String comments;
     String type;
-
+    ImageView imageview;
     RadioButton radioButton17;
     RadioButton radioButton18;
     EditText editText6;
@@ -44,6 +48,8 @@ public class BookInfo extends AppCompatActivity {
         setContentView(R.layout.activity_book_info);
 
         firestore = FirebaseFirestore.getInstance();
+
+        imageview = findViewById(R.id.imageView5);
 
         radioButton17 = findViewById(R.id.radioButton17);
         radioButton18 = findViewById(R.id.radioButton18);
@@ -64,6 +70,15 @@ public class BookInfo extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext() , Profile.class);
                 startActivity(intent);
                 finish();
+            }
+        });
+
+        uploadButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent iGallery = new Intent(Intent.ACTION_PICK);
+                iGallery.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(iGallery, GALLERY_REC_CODE);
             }
         });
 
@@ -89,6 +104,16 @@ public class BookInfo extends AppCompatActivity {
                 firestore.collection("Books").add(book);
             }
         });
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(resultCode == RESULT_OK){
+            if(requestCode == GALLERY_REC_CODE){
+                imageview.setImageURI(data.getData());
+            }
+        }
     }
     public void setCourse(String x){
         course = x;

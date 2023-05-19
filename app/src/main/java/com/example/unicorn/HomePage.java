@@ -25,6 +25,7 @@ public class HomePage extends AppCompatActivity {
     Button button11;
     Button button12;
     Button button13;
+    Button button14;
 
 
     @SuppressLint("MissingInflatedId")
@@ -45,6 +46,7 @@ public class HomePage extends AppCompatActivity {
         button11 = findViewById(R.id.button11);
         button12 = findViewById(R.id.button12);
         button13 = findViewById(R.id.button13);
+        button14 = findViewById(R.id.button14);
 
         button7.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,6 +100,16 @@ public class HomePage extends AppCompatActivity {
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
                 Intent intent = new Intent(getApplicationContext() , Login.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        button14.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(getApplicationContext() , EventsSubmenu.class);
                 startActivity(intent);
                 finish();
             }

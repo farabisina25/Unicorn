@@ -1,16 +1,19 @@
 package com.example.unicorn;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -20,6 +23,7 @@ import java.util.Map;
 
 public class RoommatesInfo extends AppCompatActivity {
     FirebaseFirestore firestore;
+    private final int GALLERY_REC_CODE = 1000;
     String gender;
     String campus;
     String workintheroom;
@@ -30,11 +34,9 @@ public class RoommatesInfo extends AppCompatActivity {
     String roommatecount;
     String sleeptime;
     String getuptime;
-
     ImageButton profileBtn;
     Button imageBtn;
     Button saveBtn;
-
     RadioButton rb1;
     RadioButton rb2;
     RadioButton rb3;
@@ -50,12 +52,12 @@ public class RoommatesInfo extends AppCompatActivity {
     RadioButton rb13;
     RadioButton rb14;
     RadioButton rb15;
-
     CheckBox checkBox1;
     CheckBox checkBox2;
     CheckBox checkBox3;
     EditText editText1;
     EditText editText2;
+    ImageView imageview;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -64,6 +66,8 @@ public class RoommatesInfo extends AppCompatActivity {
         setContentView(R.layout.activity_roommates_info);
 
         firestore = FirebaseFirestore.getInstance();
+
+        imageview = findViewById(R.id.imageView3);
 
         profileBtn =findViewById(R.id.imageButton4);
         imageBtn = findViewById(R.id.imageBtn);
@@ -129,6 +133,25 @@ public class RoommatesInfo extends AppCompatActivity {
                 firestore.collection("RoommateInfos").add(RoommateInfo);
             }
         });
+        imageBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent iGallery = new Intent(Intent.ACTION_PICK);
+                iGallery.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(iGallery, GALLERY_REC_CODE);
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(resultCode == RESULT_OK){
+            if(requestCode == GALLERY_REC_CODE){
+                imageview.setImageURI(data.getData());
+            }
+        }
     }
 
     public void setGender(){
