@@ -7,11 +7,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ScrollView;
 
 public class Interests extends AppCompatActivity {
 
-    Button profileBtn;
+    ImageButton profileBtn;
 
     ScrollView scrollView1;
     ScrollView scrollView2;
@@ -25,13 +26,13 @@ public class Interests extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_interests);
 
-        profileBtn = findViewById(R.id.profileBtn2);
-
         scrollView1 = findViewById(R.id.scrollView1);
         scrollView2 = findViewById(R.id.scrollView2);
         scrollView3 = findViewById(R.id.scrollView3);
         scrollView4 = findViewById(R.id.scrollView4);
         scrollView5 = findViewById(R.id.scrollView5);
+
+        profileBtn = findViewById(R.id.imageButton10);
 
         profileBtn.setOnClickListener(new View.OnClickListener() {
             @Override

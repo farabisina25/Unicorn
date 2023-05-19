@@ -11,13 +11,13 @@
         android:id="@+id/scrollView4"
         android:layout_width="129dp"
         android:layout_height="56dp"
-        android:layout_marginTop="50dp"
         android:layout_marginEnd="44dp"
+        android:layout_marginBottom="50dp"
         android:background="#DCC0C0"
         android:scrollbarThumbHorizontal="@color/black"
         android:scrollbarThumbVertical="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView3">
+        app:layout_constraintBottom_toTopOf="@+id/scrollView5"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -29,13 +29,13 @@
         android:id="@+id/scrollView3"
         android:layout_width="129dp"
         android:layout_height="56dp"
-        android:layout_marginTop="50dp"
         android:layout_marginEnd="44dp"
+        android:layout_marginBottom="50dp"
         android:background="#DCC0C0"
         android:scrollbarThumbHorizontal="@color/black"
         android:scrollbarThumbVertical="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView2">
+        app:layout_constraintBottom_toTopOf="@+id/scrollView4"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -47,13 +47,13 @@
         android:id="@+id/scrollView1"
         android:layout_width="129dp"
         android:layout_height="56dp"
-        android:layout_marginTop="22dp"
         android:layout_marginEnd="44dp"
+        android:layout_marginBottom="50dp"
         android:background="#DCC0C0"
         android:scrollbarThumbHorizontal="@color/black"
         android:scrollbarThumbVertical="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileBtn2">
+        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -65,13 +65,13 @@
         android:id="@+id/scrollView2"
         android:layout_width="129dp"
         android:layout_height="56dp"
-        android:layout_marginTop="50dp"
         android:layout_marginEnd="44dp"
+        android:layout_marginBottom="50dp"
         android:background="#DCC0C0"
         android:scrollbarThumbHorizontal="@color/black"
         android:scrollbarThumbVertical="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView1">
+        app:layout_constraintBottom_toTopOf="@+id/scrollView3"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -85,9 +85,9 @@
         android:layout_height="43dp"
         android:background="@color/material_dynamic_primary30"
         android:textColor="#F4EFEF"
+        tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="-5dp"
-        tools:ignore="MissingConstraints" />
+        tools:layout_editor_absoluteY="-5dp" />
 
     <TextView
         android:id="@+id/textView15"
@@ -144,14 +144,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageButton
-        android:id="@+id/profileBtn2"
-        android:layout_width="72dp"
-        android:layout_height="37dp"
-        app:layout_constraintEnd_toEndOf="@+id/textView"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/sym_def_app_icon" />
-
     <TextView
         android:id="@+id/textView20"
         android:layout_width="65dp"
@@ -182,5 +174,13 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" />
     </ScrollView>
+
+    <ImageButton
+        android:id="@+id/imageButton10"
+        android:layout_width="60dp"
+        android:layout_height="37dp"
+        app:layout_constraintEnd_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/sym_def_app_icon" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

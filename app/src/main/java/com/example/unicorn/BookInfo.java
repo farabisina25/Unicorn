@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
@@ -74,7 +75,8 @@ public class BookInfo extends AppCompatActivity {
                 setAuthor(editText8.getText().toString());
                 setPrice(editText9.getText().toString());
                 setComments(editText10.getText().toString());
-                setBookType();
+                if(radioButton17.isChecked()){type = "Reading Book";}
+                else if(radioButton18.isChecked()){type = "Lecture Book";}
 
                 Map<String,Object> book = new HashMap<>();
                 book.put("Type" , type);
@@ -88,18 +90,6 @@ public class BookInfo extends AppCompatActivity {
             }
         });
     }
-
-    public void setBookType(){
-        String x = "";
-        if(radioButton17.callOnClick()){
-            x = "Reading Book";
-        }
-        else if(radioButton18.callOnClick()){
-            x = "Lecture Book";
-        }
-        type = x;
-    }
-
     public void setCourse(String x){
         course = x;
     }
