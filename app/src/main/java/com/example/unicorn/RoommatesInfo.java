@@ -113,6 +113,7 @@ public class RoommatesInfo extends AppCompatActivity {
         editText1 = findViewById(R.id.editTextText6);
         editText2 = findViewById(R.id.editTextText7);
 
+        //comment
         //isRoommateCreated();
 
         profileBtn.setOnClickListener(new View.OnClickListener() {
