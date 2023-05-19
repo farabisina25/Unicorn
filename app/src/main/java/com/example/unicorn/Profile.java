@@ -1,49 +1,29 @@
 package com.example.unicorn;
 
-import static android.content.ContentValues.TAG;
-
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firestore.v1.WriteResult;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class Profile extends AppCompatActivity {
-
-    //Comment
     private final int GALLERY_REC_CODE = 1000;
     FirebaseFirestore firestore;
     FirebaseAuth mAuth;
@@ -153,7 +133,7 @@ public class Profile extends AppCompatActivity {
                     setBirth(editText3.getText().toString());
                     setDepartment(editText4.getText().toString());
 
-                    docRef = docRef = firestore.collection("Profiles").document(user.getUid());
+                    docRef = firestore.collection("Profiles").document(user.getUid());
                     docRef.update("Description", Description);
                     docRef.update("NameLastname", NameSurname);
                     docRef.update("Birth", BirthDate);

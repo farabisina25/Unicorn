@@ -13,9 +13,9 @@
         android:layout_height="32dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="95dp"
-        android:text="Upcoming Events"
+        android:text="Recomended Profiles"
         android:textAlignment="center"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,7 +24,7 @@
     <TextView
         android:id="@+id/textView15"
         android:layout_width="91dp"
-        android:layout_height="744dp"
+        android:layout_height="fill_parent"
         android:background="@color/material_dynamic_primary30"
         android:backgroundTint="@color/material_dynamic_primary30"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -107,6 +107,7 @@
         android:layout_marginEnd="85dp"
         android:background="#8D98AE"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
@@ -116,9 +117,9 @@
         android:layout_height="31dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="90dp"
-        android:text="Recommended Profiles"
+        android:text="Upcoming Events"
         android:textAlignment="center"
-        android:textSize="16sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -154,5 +155,197 @@
         android:text="Events"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button11" />
+
+    <ImageButton
+        android:id="@+id/profile1"
+        android:layout_width="46dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/account_circle"
+        android:backgroundTint="#AAF455"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="@+id/textView18"
+        app:layout_constraintTop_toTopOf="@+id/textView18" />
+
+    <ImageButton
+        android:id="@+id/profile2"
+        android:layout_width="46dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/account_circle"
+        android:backgroundTint="#AAF455"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="@+id/textView18"
+        app:layout_constraintTop_toBottomOf="@+id/profile1" />
+
+    <ImageButton
+        android:id="@+id/profile3"
+        android:layout_width="46dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/account_circle"
+        android:backgroundTint="#AAF455"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="@+id/textView18"
+        app:layout_constraintTop_toBottomOf="@+id/profile2" />
+
+    <ImageButton
+        android:id="@+id/profile4"
+        android:layout_width="46dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/account_circle"
+        android:backgroundTint="#AAF455"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="@+id/textView18"
+        app:layout_constraintTop_toBottomOf="@+id/profile3" />
+
+    <TextView
+        android:id="@+id/nameSurname1"
+        android:layout_width="150dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="15dp"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/textView18"
+        app:layout_constraintTop_toTopOf="@+id/textView18" />
+
+    <TextView
+        android:id="@+id/nameSurname2"
+        android:layout_width="150dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="15dp"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/textView18"
+        app:layout_constraintTop_toBottomOf="@+id/nameSurname1" />
+
+    <TextView
+        android:id="@+id/nameSurname3"
+        android:layout_width="150dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="15dp"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/textView18"
+        app:layout_constraintTop_toBottomOf="@+id/nameSurname2" />
+
+    <TextView
+        android:id="@+id/nameSurname4"
+        android:layout_width="150dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="15dp"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/textView18"
+        app:layout_constraintTop_toBottomOf="@+id/nameSurname3" />
+
+    <ImageButton
+        android:id="@+id/imageAct1"
+        android:layout_width="46dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/party_popper"
+        android:backgroundTint="#FFEB3B"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="@+id/textView20"
+        app:layout_constraintTop_toTopOf="@+id/textView20" />
+
+    <ImageButton
+        android:id="@+id/imageAct2"
+        android:layout_width="46dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/party_popper"
+        android:backgroundTint="#FA5656"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="@+id/textView20"
+        app:layout_constraintTop_toBottomOf="@+id/imageAct1" />
+
+    <ImageButton
+        android:id="@+id/imageAct3"
+        android:layout_width="46dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/party_popper"
+        android:backgroundTint="#97A7FD"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="@+id/textView20"
+        app:layout_constraintTop_toBottomOf="@+id/imageAct2" />
+
+    <ImageButton
+        android:id="@+id/imageAct4"
+        android:layout_width="46dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/party_popper"
+        android:backgroundTint="#A779F8"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="@+id/textView20"
+        app:layout_constraintTop_toBottomOf="@+id/imageAct3" />
+
+    <TextView
+        android:id="@+id/activity1"
+        android:layout_width="150dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="15dp"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/textView20"
+        app:layout_constraintTop_toTopOf="@+id/textView20" />
+
+    <TextView
+        android:id="@+id/activity2"
+        android:layout_width="150dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="15dp"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/textView20"
+        app:layout_constraintTop_toBottomOf="@+id/activity1" />
+
+    <TextView
+        android:id="@+id/activity3"
+        android:layout_width="150dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="15dp"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/textView20"
+        app:layout_constraintTop_toBottomOf="@+id/activity2" />
+
+    <TextView
+        android:id="@+id/activity4"
+        android:layout_width="150dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="15dp"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/textView20"
+        app:layout_constraintTop_toBottomOf="@+id/activity3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

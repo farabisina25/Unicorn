@@ -126,7 +126,7 @@ public class RoommatesInfo extends AppCompatActivity {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(saveBtn.getText().toString().equals("Edit")){
+                /*if(saveBtn.getText().toString().equals("Edit")){
                     setGender();
                     setCampus();
                     setWorkplace();
@@ -149,7 +149,7 @@ public class RoommatesInfo extends AppCompatActivity {
                     docRef.update("Roommate Count" , roommatecount);
                     docRef.update("Sleep Time" , sleeptime);
                     docRef.update("Get Up Time" , getuptime);
-                }
+                }*/
                 setGender();
                 setCampus();
                 setWorkplace();
@@ -216,7 +216,9 @@ public class RoommatesInfo extends AppCompatActivity {
                     sleeptime = documentSnapshot.getData().get("Sleep Time").toString();
                     getuptime = documentSnapshot.getData().get("Get Up Time").toString();
 
-                    saveBtn.setText("Edit");
+                    saveBtn.setText("Saved");
+                    saveBtn.setClickable(false);
+                    saveBtn.setFocusable(false);
 
                     if(gender.equals("Man")){rb1.setChecked(true);}
                     else if(gender.equals("Woman")){rb2.setChecked(true);}
@@ -246,6 +248,27 @@ public class RoommatesInfo extends AppCompatActivity {
 
                     editText1.setText(sleeptime);
                     editText2.setText(getuptime);
+
+                    rb1.setClickable(false);
+                    rb2.setClickable(false);
+                    rb3.setClickable(false);
+                    rb4.setClickable(false);
+                    rb5.setClickable(false);
+                    rb6.setClickable(false);
+                    rb7.setClickable(false);
+                    rb8.setClickable(false);
+                    rb9.setClickable(false);
+                    rb10.setClickable(false);
+                    rb11.setClickable(false);
+                    rb12.setClickable(false);
+                    rb13.setClickable(false);
+                    rb14.setClickable(false);
+                    rb15.setClickable(false);
+                    checkBox1.setClickable(false);
+                    checkBox2.setClickable(false);
+                    checkBox3.setClickable(false);
+                    editText1.setEnabled(false);
+                    editText2.setEnabled(false);
                 }
             }
         });

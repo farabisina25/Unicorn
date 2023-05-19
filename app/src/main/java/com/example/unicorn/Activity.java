@@ -70,7 +70,7 @@ public class Activity extends AppCompatActivity {
                 activity.put("Description", description);
                 activity.put("Type" , type);
 
-                firestore.collection("Activities1").add(activity);
+                firestore.collection("Activities").add(activity);
             }
         });
 
