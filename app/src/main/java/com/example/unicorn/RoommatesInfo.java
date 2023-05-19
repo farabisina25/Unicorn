@@ -16,6 +16,12 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -23,6 +29,10 @@ import java.util.Map;
 
 public class RoommatesInfo extends AppCompatActivity {
     FirebaseFirestore firestore;
+    FirebaseUser user;
+    FirebaseAuth mAuth;
+    CollectionReference RoommateInfos;
+    DocumentReference docRef;
     private final int GALLERY_REC_CODE = 1000;
     String gender;
     String campus;
@@ -58,6 +68,8 @@ public class RoommatesInfo extends AppCompatActivity {
     EditText editText1;
     EditText editText2;
     ImageView imageview;
+    String Email;
+
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -66,12 +78,17 @@ public class RoommatesInfo extends AppCompatActivity {
         setContentView(R.layout.activity_roommates_info);
 
         firestore = FirebaseFirestore.getInstance();
+        user = mAuth.getCurrentUser();
+        mAuth = FirebaseAuth.getInstance();
+        RoommateInfos = firestore.collection("RoommateInfos");
 
         imageview = findViewById(R.id.imageView3);
 
         profileBtn =findViewById(R.id.imageButton4);
         imageBtn = findViewById(R.id.imageBtn);
         saveBtn = findViewById(R.id.button);
+
+        Email = user.getEmail();
 
         rb1 = findViewById(R.id.rb1);
         rb2 = findViewById(R.id.rb2);
@@ -96,6 +113,8 @@ public class RoommatesInfo extends AppCompatActivity {
         editText1 = findViewById(R.id.editTextText6);
         editText2 = findViewById(R.id.editTextText7);
 
+        //isRoommateCreated();
+
         profileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,6 +126,30 @@ public class RoommatesInfo extends AppCompatActivity {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(saveBtn.getText().toString().equals("Edit")){
+                    setGender();
+                    setCampus();
+                    setWorkplace();
+                    setSmoke();
+                    setCook();
+                    setInstrument();
+                    setSleepLight();
+                    RoommateCount();
+                    SleepTime(editText1.getText().toString());
+                    getUpTime(editText2.getText().toString());
+
+                    docRef = firestore.collection("RoommateInfos").document(user.getUid());
+                    docRef.update("Gender", gender);
+                    docRef.update("Campus", campus);
+                    docRef.update("WorkPlace", workintheroom);
+                    docRef.update("Smoke", smoke);
+                    docRef.update("Cook" , cook);
+                    docRef.update("Instrument" , instrument);
+                    docRef.update("Sleep Light" , sleeplight);
+                    docRef.update("Roommate Count" , roommatecount);
+                    docRef.update("Sleep Time" , sleeptime);
+                    docRef.update("Get Up Time" , getuptime);
+                }
                 setGender();
                 setCampus();
                 setWorkplace();
@@ -129,8 +172,10 @@ public class RoommatesInfo extends AppCompatActivity {
                 RoommateInfo.put("Roommate Count" , roommatecount);
                 RoommateInfo.put("Sleep Time" , sleeptime);
                 RoommateInfo.put("Get Up Time" , getuptime);
+                RoommateInfo.put("ID" , user.getUid());
 
-                firestore.collection("RoommateInfos").add(RoommateInfo);
+                RoommateInfos.document(user.getUid()).set(RoommateInfo);
+                //isRoommateCreated();
             }
         });
         imageBtn.setOnClickListener(new View.OnClickListener() {
@@ -153,6 +198,59 @@ public class RoommatesInfo extends AppCompatActivity {
             }
         }
     }
+
+    /*public void isRoommateCreated(){
+        docRef = firestore.collection("RoommateInfos").document(user.getUid());
+        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if(documentSnapshot.exists()){
+                    gender = documentSnapshot.getData().get("Gender").toString();
+                    campus = documentSnapshot.getData().get("Campus").toString();
+                    workintheroom = documentSnapshot.getData().get("WorkPlace").toString();
+                    smoke = documentSnapshot.getData().get("Smoke").toString();
+                    cook = documentSnapshot.getData().get("Cook").toString();
+                    instrument = documentSnapshot.getData().get("Instrument").toString();
+                    sleeplight = documentSnapshot.getData().get("Sleep Light").toString();
+                    roommatecount = documentSnapshot.getData().get("Roommate Count").toString();
+                    sleeptime = documentSnapshot.getData().get("Sleep Time").toString();
+                    getuptime = documentSnapshot.getData().get("Get Up Time").toString();
+
+                    saveBtn.setText("Edit");
+
+                    if(gender.equals("Male")){rb1.setChecked(true);}
+                    else if(gender.equals("Female")){rb2.setChecked(true);}
+
+                    if(campus.equals("Main")){rb3.setChecked(true);}
+                    else if(gender.equals("East")){rb4.setChecked(true);}
+
+                    if(workintheroom.equals("Yes")){rb5.setChecked(true);}
+                    else if(workintheroom.equals("No")){rb6.setChecked(true);}
+                    else if(workintheroom.equals("Sometimes")){rb7.setChecked(true);}
+
+                    if(smoke.equals("Yes")){rb8.setChecked(true);}
+                    else if(smoke.equals("No")){rb9.setChecked(true);}
+
+                    if(cook.equals("Yes")){rb10.setChecked(true);}
+                    else if(cook.equals("No")){rb11.setChecked(true);}
+
+                    if(instrument.equals("Yes")){rb12.setChecked(true);}
+                    else if(instrument.equals("No")){rb13.setChecked(true);}
+
+                    if(sleeplight.equals("Yes")){rb14.setChecked(true);}
+                    else if(sleeplight.equals("No")){rb15.setChecked(true);}
+
+                    if(roommatecount.equals("2")){checkBox1.setChecked(true);}
+                    else if(roommatecount.equals("3")){checkBox2.setChecked(true);}
+                    else if(roommatecount.equals("4")){checkBox3.setChecked(true);}
+
+                    editText1.setText(sleeptime);
+                    editText2.setText(getuptime);
+                }
+            }
+        });
+
+    }*/
 
     public void setGender(){
         if(rb1.isChecked()){gender = "Yes";}

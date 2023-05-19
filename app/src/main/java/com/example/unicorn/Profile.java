@@ -1,5 +1,7 @@
 package com.example.unicorn;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,6 +10,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +18,10 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -23,7 +30,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firestore.v1.WriteResult;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,8 +48,8 @@ public class Profile extends AppCompatActivity {
     FirebaseFirestore firestore;
     FirebaseAuth mAuth;
     FirebaseUser user;
-    DatabaseReference reference;
-    Query checkUser;
+    DocumentReference docRef;
+    CollectionReference Profiles;
     String Email;
     String Description;
     String NameSurname;
@@ -61,8 +74,6 @@ public class Profile extends AppCompatActivity {
     Button button5;
     Button button6;
     ImageButton homepagebutton;
-    String emailFromDB;
-
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -73,7 +84,7 @@ public class Profile extends AppCompatActivity {
         firestore = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
-        reference = FirebaseDatabase.getInstance().getReference("Profiles");
+        Profiles = firestore.collection("Profiles");
 
         Email = user.getEmail();
 
@@ -96,6 +107,7 @@ public class Profile extends AppCompatActivity {
         button6 = findViewById(R.id.button6);
         homepagebutton  =findViewById(R.id.imageButton);
 
+        isProfileCreated();
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -135,6 +147,18 @@ public class Profile extends AppCompatActivity {
         button5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(button5.getText().toString().equals("Edit")){
+                    setDescription(editText1.getText().toString());
+                    setNameSurname(editText2.getText().toString());
+                    setBirth(editText3.getText().toString());
+                    setDepartment(editText4.getText().toString());
+
+                    docRef = docRef = firestore.collection("Profiles").document(user.getUid());
+                    docRef.update("Description", Description);
+                    docRef.update("NameLastname", NameSurname);
+                    docRef.update("Birth", BirthDate);
+                    docRef.update("Department", Department);
+                }
                     setDescription(editText1.getText().toString());
                     setNameSurname(editText2.getText().toString());
                     setBirth(editText3.getText().toString());
@@ -146,8 +170,11 @@ public class Profile extends AppCompatActivity {
                     profile.put("NameLastname" , NameSurname);
                     profile.put("Birth" , BirthDate);
                     profile.put("Department" , Department);
+                    profile.put("ID" , user.getUid());
 
-                    firestore.collection("Profiles").add(profile);
+                    Profiles.document(user.getUid()).set(profile);
+
+                    isProfileCreated();
             }
         });
 
@@ -182,32 +209,26 @@ public class Profile extends AppCompatActivity {
     }
 
     public void isProfileCreated(){
-        checkUser = reference.orderByChild("Email").equalTo(Email);
-        checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
-
+        docRef = firestore.collection("Profiles").document(user.getUid());
+        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    emailFromDB = snapshot.child(Email).child("Email").getValue(String.class);
-                    if(emailFromDB.equals(Email)){
-                        Email = emailFromDB;
-                        Description = snapshot.child(Email).child("Description").getValue(String.class);
-                        NameSurname = snapshot.child(Email).child("NameSurname").getValue(String.class);
-                        BirthDate = snapshot.child(Email).child("BirthDate").getValue(String.class);
-                        Department = snapshot.child(Email).child("Department").getValue(String.class);
-                        Intent intent = new Intent(getApplicationContext() , HomePage.class);
-                        startActivity(intent);
-                        finish();
-                    }
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if(documentSnapshot.exists()){
+                    NameSurname = documentSnapshot.getData().get("NameLastname").toString();
+                    Description = documentSnapshot.getData().get("Description").toString();
+                    BirthDate = documentSnapshot.getData().get("Birth").toString();
+                    Department = documentSnapshot.getData().get("Department").toString();
+
+                    editText1.setText(Description);
+                    editText2.setText(NameSurname);
+                    editText3.setText(BirthDate);
+                    editText4.setText(Department);
+
+                    button5.setText("Edit");
                 }
             }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                    emailFromDB = null;
-            }
-
         });
+
     }
     public void setDescription(String x){
         Description = x;
