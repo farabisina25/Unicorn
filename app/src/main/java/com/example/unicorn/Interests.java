@@ -17,6 +17,7 @@ public class Interests extends AppCompatActivity {
     ScrollView scrollView2;
     ScrollView scrollView3;
     ScrollView scrollView4;
+    ScrollView scrollView5;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -26,10 +27,11 @@ public class Interests extends AppCompatActivity {
 
         profileBtn = findViewById(R.id.profileBtn2);
 
-        scrollView1 = findViewById(R.id.scrollView2);
-        scrollView2 = findViewById(R.id.scrollView3);
-        scrollView3 = findViewById(R.id.scrollView4);
-        scrollView4 = findViewById(R.id.scrollView5);
+        scrollView1 = findViewById(R.id.scrollView1);
+        scrollView2 = findViewById(R.id.scrollView2);
+        scrollView3 = findViewById(R.id.scrollView3);
+        scrollView4 = findViewById(R.id.scrollView4);
+        scrollView5 = findViewById(R.id.scrollView5);
 
         profileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
