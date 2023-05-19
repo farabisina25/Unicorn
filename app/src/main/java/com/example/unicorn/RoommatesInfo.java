@@ -78,8 +78,8 @@ public class RoommatesInfo extends AppCompatActivity {
         setContentView(R.layout.activity_roommates_info);
 
         firestore = FirebaseFirestore.getInstance();
-        user = mAuth.getCurrentUser();
         mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
         RoommateInfos = firestore.collection("RoommateInfos");
 
         imageview = findViewById(R.id.imageView3);
@@ -113,7 +113,7 @@ public class RoommatesInfo extends AppCompatActivity {
         editText1 = findViewById(R.id.editTextText6);
         editText2 = findViewById(R.id.editTextText7);
 
-        //isRoommateCreated();
+        isRoommateCreated();
 
         profileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -174,8 +174,9 @@ public class RoommatesInfo extends AppCompatActivity {
                 RoommateInfo.put("Get Up Time" , getuptime);
                 RoommateInfo.put("ID" , user.getUid());
 
+                //firestore.collection("RoommateInfos").add(RoommateInfo);
                 RoommateInfos.document(user.getUid()).set(RoommateInfo);
-                //isRoommateCreated();
+                isRoommateCreated();
             }
         });
         imageBtn.setOnClickListener(new View.OnClickListener() {
@@ -199,7 +200,7 @@ public class RoommatesInfo extends AppCompatActivity {
         }
     }
 
-    /*public void isRoommateCreated(){
+    public void isRoommateCreated(){
         docRef = firestore.collection("RoommateInfos").document(user.getUid());
         docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
@@ -250,7 +251,7 @@ public class RoommatesInfo extends AppCompatActivity {
             }
         });
 
-    }*/
+    }
 
     public void setGender(){
         if(rb1.isChecked()){gender = "Yes";}
