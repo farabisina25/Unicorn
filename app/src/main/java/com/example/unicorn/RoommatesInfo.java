@@ -173,8 +173,7 @@ public class RoommatesInfo extends AppCompatActivity {
                 RoommateInfo.put("Sleep Time" , sleeptime);
                 RoommateInfo.put("Get Up Time" , getuptime);
                 RoommateInfo.put("ID" , user.getUid());
-
-                //firestore.collection("RoommateInfos").add(RoommateInfo);
+                
                 RoommateInfos.document(user.getUid()).set(RoommateInfo);
                 isRoommateCreated();
             }
@@ -219,8 +218,8 @@ public class RoommatesInfo extends AppCompatActivity {
 
                     saveBtn.setText("Edit");
 
-                    if(gender.equals("Male")){rb1.setChecked(true);}
-                    else if(gender.equals("Female")){rb2.setChecked(true);}
+                    if(gender.equals("Man")){rb1.setChecked(true);}
+                    else if(gender.equals("Woman")){rb2.setChecked(true);}
 
                     if(campus.equals("Main")){rb3.setChecked(true);}
                     else if(gender.equals("East")){rb4.setChecked(true);}
@@ -254,8 +253,8 @@ public class RoommatesInfo extends AppCompatActivity {
     }
 
     public void setGender(){
-        if(rb1.isChecked()){gender = "Yes";}
-        else if(rb2.isChecked()){gender = "No";}
+        if(rb1.isChecked()){gender = "Man";}
+        else if(rb2.isChecked()){gender = "Woman";}
     }
 
     public void setCampus(){
