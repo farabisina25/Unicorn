@@ -31,9 +31,9 @@
 
     <ImageButton
         android:id="@+id/profileBtn2"
-        android:layout_width="52dp"
-        android:layout_height="40dp"
-        android:src="@android:drawable/sym_def_app_icon"
+        android:layout_width="41dp"
+        android:layout_height="42dp"
+        android:background="@drawable/account_circle"
         app:layout_constraintEnd_toEndOf="@+id/textView"
         app:layout_constraintTop_toTopOf="parent" />
 

@@ -9,7 +9,7 @@
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="411dp"
+        android:layout_width="fill_parent"
         android:layout_height="43dp"
         android:background="@color/material_dynamic_primary30"
         android:textAlignment="textStart"
@@ -425,11 +425,11 @@
 
     <ImageButton
         android:id="@+id/imageButton4"
-        android:layout_width="52dp"
-        android:layout_height="40dp"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:background="@drawable/account_circle"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/sym_def_app_icon" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView21"
