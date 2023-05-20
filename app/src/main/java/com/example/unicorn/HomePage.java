@@ -164,7 +164,7 @@ public class HomePage extends AppCompatActivity {
         activity1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext() , EventsSubmenu.class);
+                Intent intent = new Intent(getApplicationContext() , EventsSubmenu2.class);
                 startActivity(intent);
                 finish();
             }
@@ -172,7 +172,7 @@ public class HomePage extends AppCompatActivity {
         activity2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext() , EventsSubmenu.class);
+                Intent intent = new Intent(getApplicationContext() , EventsSubmenu2.class);
                 startActivity(intent);
                 finish();
             }
@@ -180,7 +180,7 @@ public class HomePage extends AppCompatActivity {
         activity3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext() , EventsSubmenu.class);
+                Intent intent = new Intent(getApplicationContext() , EventsSubmenu2.class);
                 startActivity(intent);
                 finish();
             }
@@ -188,7 +188,7 @@ public class HomePage extends AppCompatActivity {
         activity4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext() , EventsSubmenu.class);
+                Intent intent = new Intent(getApplicationContext() , EventsSubmenu2.class);
                 startActivity(intent);
                 finish();
             }
@@ -287,8 +287,7 @@ public class HomePage extends AppCompatActivity {
         button14.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(getApplicationContext() , EventsSubmenu.class);
+                Intent intent = new Intent(getApplicationContext() , EventsSubmenu2.class);
                 startActivity(intent);
                 finish();
             }
