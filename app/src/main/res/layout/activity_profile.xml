@@ -10,16 +10,16 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="103dp"
-        android:layout_height="99dp"
-        android:layout_marginTop="40dp"
+        android:layout_width="110dp"
+        android:layout_height="111dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="200dp"
+        android:background="@drawable/account_circle"
+        android:backgroundTint="#C480CF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_gallery"
-        tools:ignore="MissingConstraints"
-        tools:srcCompat="@android:drawable/ic_menu_gallery" />
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/editText1"
@@ -138,8 +138,8 @@
 
     <Button
         android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="130dp"
+        android:layout_height="60dp"
         android:layout_marginTop="175dp"
         android:layout_marginEnd="20dp"
         android:text="@string/roommates"
@@ -149,8 +149,8 @@
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="126dp"
-        android:layout_height="48dp"
+        android:layout_width="130dp"
+        android:layout_height="60dp"
         android:layout_marginTop="35dp"
         android:layout_marginEnd="20dp"
         android:text="@string/books"
@@ -160,8 +160,8 @@
 
     <Button
         android:id="@+id/button3"
-        android:layout_width="123dp"
-        android:layout_height="56dp"
+        android:layout_width="130dp"
+        android:layout_height="60dp"
         android:layout_marginTop="35dp"
         android:layout_marginEnd="20dp"
         android:text="@string/interests"
@@ -171,8 +171,8 @@
 
     <Button
         android:id="@+id/button4"
-        android:layout_width="119dp"
-        android:layout_height="62dp"
+        android:layout_width="130dp"
+        android:layout_height="60dp"
         android:layout_marginTop="35dp"
         android:layout_marginEnd="20dp"
         android:text="Activity"
@@ -183,7 +183,7 @@
     <Button
         android:id="@+id/button5"
         style="@style/Widget.Material3.Button"
-        android:layout_width="118dp"
+        android:layout_width="130dp"
         android:layout_height="83dp"
         android:layout_marginTop="35dp"
         android:layout_marginEnd="20dp"
