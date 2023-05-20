@@ -138,7 +138,7 @@ public class BookSubmenu extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             int i = 0;
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                if(document.exists() && i < 10){
+                                if(document.exists()){
                                     books[i] = document.getData().get("Name").toString();
                                     i++;
                                 }

@@ -6,12 +6,32 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 public class ProfilesSubmenu extends AppCompatActivity {
+    FirebaseFirestore firestore;
+    FirebaseAuth mAuth;
+    FirebaseUser user;
+    DocumentReference docRef;
+    CollectionReference Books;
     String userName;
     ImageButton homeBtn;
     ImageButton profileBtn;
@@ -24,11 +44,20 @@ public class ProfilesSubmenu extends AppCompatActivity {
     TextView textView5;
     TextView textView6;
     TextView textView7;
+    String[] profiles = new String[50];
+    String NameLastname;
+    String Department;
+    String Description;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profiles_submenu);
+
+        firestore = FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
+        Books = firestore.collection("Profiles");
 
         homeBtn = findViewById(R.id.homeBtn);
         searchBtn = findViewById(R.id.button10);
@@ -43,6 +72,12 @@ public class ProfilesSubmenu extends AppCompatActivity {
         textView7 = findViewById(R.id.textView49);
 
         actextView = findViewById(R.id.autoCompleteTextView);
+
+        setProfiles();
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, profiles);
+        actextView.setAdapter(adapter);
+
 
         homeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,8 +108,66 @@ public class ProfilesSubmenu extends AppCompatActivity {
 
                     profileBtn.setVisibility(View.VISIBLE);
                     profileBtn.setClickable(true);
+
+                    getProfiles(userName);
                 }
             }
         });
+    }
+
+    public void setProfiles(){
+        firestore.collection("Profiles")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            int i= 0;
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                if(document.exists()){
+                                    profiles[i] = document.getData().get("NameLastname").toString();
+                                    i++;
+                                }
+                            }
+                        }
+                    }
+                });
+        for(int i = 0 ; i< 50 ; i++){
+            if(profiles[i] == null){
+                profiles[i] = "!";
+            }
+        }
+    }
+
+    public void getProfiles(String name){
+        firestore.collection("Profiles")
+                .whereEqualTo("NameLastname", name)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                docRef = firestore.collection("Profiles").document(document.getId());
+                                docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                        if(documentSnapshot.exists()){
+                                            NameLastname = documentSnapshot.getData().get("NameLastname").toString();
+                                            Department = documentSnapshot.getData().get("Department").toString();
+                                            Description = documentSnapshot.getData().get("Description").toString();
+
+                                            textView4.setText(NameLastname);
+                                            textView5.setText(Department);
+                                            textView6.setText(Description);
+                                            textView7.setText(NameLastname);
+                                        }
+                                    }
+                                });
+
+                            }
+                        }
+                    }
+                });
     }
 }
