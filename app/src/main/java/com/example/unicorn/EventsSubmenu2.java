@@ -7,6 +7,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
@@ -34,11 +35,14 @@ public class EventsSubmenu2 extends AppCompatActivity {
     DocumentReference docRef;
     CollectionReference Books;
     String eventtype;
+    Button searchBut;
     ImageButton homepagebutton;
     ImageButton profileBut;
     RadioButton rb1;
     RadioButton rb2;
     RadioButton rb3;
+    AutoCompleteTextView autoCompleteTextView;
+    TextView textView;
     TextView textView1;
     TextView textView2;
     TextView textView3;
@@ -64,6 +68,7 @@ public class EventsSubmenu2 extends AppCompatActivity {
         user = mAuth.getCurrentUser();
         Books = firestore.collection("Activities");
 
+        textView  = findViewById(R.id.tv);
         textView1 = findViewById(R.id.textView50);
         textView2 = findViewById(R.id.textView51);
         textView3 = findViewById(R.id.textView52);
@@ -74,29 +79,29 @@ public class EventsSubmenu2 extends AppCompatActivity {
         textView8 = findViewById(R.id.textView57);
         textView9 = findViewById(R.id.textView58);
 
+        autoCompleteTextView = findViewById(R.id.act);
+
         homepagebutton = findViewById(R.id.imageButton2);
         profileBut = findViewById(R.id.imageButton7);
+        searchBut = findViewById(R.id.searchBut);
 
         rb1 = findViewById(R.id.radioButton);
         rb2 = findViewById(R.id.radioButton3);
         rb3 = findViewById(R.id.radioButton4);
 
-        setActivities();
+
 
         rb1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 eventtype = "Concert";
 
-                textView1.setVisibility(View.VISIBLE);
-                textView2.setVisibility(View.VISIBLE);
-                textView3.setVisibility(View.VISIBLE);
-                textView4.setVisibility(View.VISIBLE);
-                textView5.setVisibility(View.VISIBLE);
-                profileBut.setVisibility(View.VISIBLE);
-                profileBut.setClickable(true);
+                textView.setVisibility(View.VISIBLE);
+                autoCompleteTextView.setVisibility(View.VISIBLE);
+                searchBut.setVisibility(View.VISIBLE);
+                searchBut.setClickable(true);
 
-                getActivities(eventtype);
+                setActivities(eventtype);
             }
         });
 
@@ -105,15 +110,12 @@ public class EventsSubmenu2 extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 eventtype = "Theatre";
 
-                textView1.setVisibility(View.VISIBLE);
-                textView2.setVisibility(View.VISIBLE);
-                textView3.setVisibility(View.VISIBLE);
-                textView4.setVisibility(View.VISIBLE);
-                textView5.setVisibility(View.VISIBLE);
-                profileBut.setVisibility(View.VISIBLE);
-                profileBut.setClickable(true);
+                textView.setVisibility(View.VISIBLE);
+                autoCompleteTextView.setVisibility(View.VISIBLE);
+                searchBut.setVisibility(View.VISIBLE);
+                searchBut.setClickable(true);
 
-                getActivities(eventtype);
+                setActivities(eventtype);
             }
         });
 
@@ -122,17 +124,17 @@ public class EventsSubmenu2 extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 eventtype = "Party/Festival";
 
-                textView1.setVisibility(View.VISIBLE);
-                textView2.setVisibility(View.VISIBLE);
-                textView3.setVisibility(View.VISIBLE);
-                textView4.setVisibility(View.VISIBLE);
-                textView5.setVisibility(View.VISIBLE);
-                profileBut.setVisibility(View.VISIBLE);
-                profileBut.setClickable(true);
+                textView.setVisibility(View.VISIBLE);
+                autoCompleteTextView.setVisibility(View.VISIBLE);
+                searchBut.setVisibility(View.VISIBLE);
+                searchBut.setClickable(true);
 
-                getActivities(eventtype);
+                setActivities(eventtype);
             }
         });
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, activities);
+        autoCompleteTextView.setAdapter(adapter);
 
         homepagebutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -152,10 +154,28 @@ public class EventsSubmenu2 extends AppCompatActivity {
             }
         });
 
+        searchBut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Name = autoCompleteTextView.getText().toString();
+                if(Name != null){
+                    textView1.setVisibility(View.VISIBLE);
+                    textView2.setVisibility(View.VISIBLE);
+                    textView3.setVisibility(View.VISIBLE);
+                    textView4.setVisibility(View.VISIBLE);
+                    textView5.setVisibility(View.VISIBLE);
+                    profileBut.setVisibility(View.VISIBLE);
+                    profileBut.setClickable(true);
+
+                    getActivities(Name);
+                }
+            }
+        });
+
     }
 
-    public void setActivities(){
-        firestore.collection("Activities")
+    public void setActivities(String type){
+        firestore.collection("Activities").whereEqualTo("Type" , type)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -178,9 +198,9 @@ public class EventsSubmenu2 extends AppCompatActivity {
         }
     }
 
-    public void getActivities(String type){
+    public void getActivities(String name){
         firestore.collection("Activities")
-                .whereEqualTo("Name", type)
+                .whereEqualTo("Name", name)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -192,17 +212,16 @@ public class EventsSubmenu2 extends AppCompatActivity {
                                     @Override
                                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                                         if(documentSnapshot.exists()){
-                                            Name = documentSnapshot.getData().get("Type").toString();
-                                            Date = documentSnapshot.getData().get("Name").toString();
-                                            Place = documentSnapshot.getData().get("Author").toString();
-                                            Description = documentSnapshot.getData().get("Price").toString();
+                                            Name = documentSnapshot.getData().get("Name").toString();
+                                            Date = documentSnapshot.getData().get("Date").toString();
+                                            Place = documentSnapshot.getData().get("place").toString();
+                                            Description = documentSnapshot.getData().get("Description").toString();
 
-                                            /*textView6.setText(BookName);
-                                            textView7.setText(BookAuthor);
-                                            textView8.setText(BookPrice);
-                                            textView9.setText(BookType);
-                                            textView10.setText(BookComments);
-                                            textView11.setText(OwnerName);*/
+                                            textView5.setText(Name);
+                                            textView6.setText(Date);
+                                            textView7.setText(Place);
+                                            textView8.setText(Description);
+                                            textView9.setText(Name);
                                         }
                                     }
                                 });

@@ -29,11 +29,11 @@
 
     <TextView
         android:id="@+id/textView34"
-        android:layout_width="355dp"
-        android:layout_height="551dp"
+        android:layout_width="357dp"
+        android:layout_height="505dp"
         android:layout_marginStart="27dp"
         android:layout_marginEnd="27dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="28dp"
         android:background="#CFC2C2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,9 +46,7 @@
         android:layout_height="30dp"
         android:layout_marginTop="11dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="22dp"
         android:text="Concert"
-        app:layout_constraintBottom_toTopOf="@+id/textView34"
         app:layout_constraintEnd_toStartOf="@+id/radioButton3"
         app:layout_constraintTop_toBottomOf="@+id/textView30" />
 
@@ -58,9 +56,7 @@
         android:layout_height="30dp"
         android:layout_marginTop="54dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="22dp"
         android:text="Theatre"
-        app:layout_constraintBottom_toTopOf="@+id/textView34"
         app:layout_constraintEnd_toStartOf="@+id/radioButton4"
         app:layout_constraintTop_toBottomOf="@+id/textView27" />
 
@@ -69,19 +65,18 @@
         android:layout_width="134dp"
         android:layout_height="30dp"
         android:layout_marginTop="54dp"
-        android:layout_marginBottom="22dp"
         android:text="Party/Festival"
-        app:layout_constraintBottom_toTopOf="@+id/textView34"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView27" />
 
     <TextView
         android:id="@+id/textView30"
-        android:layout_width="120dp"
-        android:layout_height="25dp"
+        android:layout_width="138dp"
+        android:layout_height="24dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="18dp"
         android:text="Type of the Event:"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView27" />
@@ -100,7 +95,7 @@
         android:layout_width="90dp"
         android:layout_height="25dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="20dp"
         android:text="Event's Name:"
         android:textAlignment="center"
         android:textStyle="bold"
@@ -151,7 +146,7 @@
         android:id="@+id/textView54"
         android:layout_width="165dp"
         android:layout_height="25dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="30dp"
         android:textAlignment="center"
         android:textStyle="bold"
@@ -208,10 +203,50 @@
         android:layout_height="49dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="70dp"
-        android:visibility="invisible"
         android:background="@drawable/party_popper"
         android:backgroundTint="#F49E82"
+        android:clickable="false"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="@+id/textView34"
         app:layout_constraintTop_toBottomOf="@+id/textView53" />
+
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="120dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="18dp"
+        android:text="Event's Name:"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioButton" />
+
+    <AutoCompleteTextView
+        android:id="@+id/act"
+        android:layout_width="227dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="30dp"
+        android:hint="Event's Name"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioButton4" />
+
+    <Button
+        android:id="@+id/searchBut"
+        android:layout_width="74dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:backgroundTint="#8898F3"
+        android:clickable="false"
+        android:text="Search"
+        android:textSize="8sp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
