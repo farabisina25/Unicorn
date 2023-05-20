@@ -101,16 +101,14 @@ public class Activity extends AppCompatActivity {
     }
 
     public void setType(){
-        String x = "";
-        if(radioButton17.callOnClick()){
-            x = "Concert";
+        if(radioButton17.isChecked()){
+            type = "Concert";
         }
-        else if(radioButton18.callOnClick()){
-            x = "Theatre";
+        else if(radioButton18.isChecked()){
+            type = "Theatre";
         }
         else{
-            x = "Party/Festival";
+            type = "Party/Festival";
         }
-        type  = x;
     }
 }
