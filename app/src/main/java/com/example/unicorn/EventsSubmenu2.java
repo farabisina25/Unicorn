@@ -56,6 +56,7 @@ public class EventsSubmenu2 extends AppCompatActivity {
     String Date;
     String Place;
     String Description;
+    String userName;
     String[] activities = new String[50];
     @SuppressLint("MissingInflatedId")
     @Override
@@ -214,14 +215,14 @@ public class EventsSubmenu2 extends AppCompatActivity {
                                         if(documentSnapshot.exists()){
                                             Name = documentSnapshot.getData().get("Name").toString();
                                             Date = documentSnapshot.getData().get("Date").toString();
-                                            Place = documentSnapshot.getData().get("place").toString();
+                                            Place = documentSnapshot.getData().get("Place").toString();
                                             Description = documentSnapshot.getData().get("Description").toString();
 
                                             textView5.setText(Name);
                                             textView6.setText(Date);
                                             textView7.setText(Place);
                                             textView8.setText(Description);
-                                            textView9.setText(Name);
+                                            setName();
                                         }
                                     }
                                 });
@@ -232,4 +233,30 @@ public class EventsSubmenu2 extends AppCompatActivity {
                 });
     }
 
+    public void setName(){
+        firestore.collection("Profiles")
+                .whereEqualTo("ID", user.getUid())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                docRef = firestore.collection("Profiles").document(document.getId());
+                                docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                        if(documentSnapshot.exists()){
+                                            userName = documentSnapshot.getData().get("NameLastname").toString();
+
+                                            textView9.setText(userName);
+                                        }
+                                    }
+                                });
+
+                            }
+                        }
+                    }
+                });
+    }
 }

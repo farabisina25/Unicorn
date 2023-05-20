@@ -61,22 +61,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /*Map<String,Object> user = new HashMap<>();
-        user.put("firstname" , "Merve");
-        user.put("lastname" , "Gul-ec");
-        user.put("description" , "Sub");
-
-        firestore.collection("users").add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-            @Override
-            public void onSuccess(DocumentReference documentReference) {
-                Toast.makeText(getApplicationContext(), "Success" , Toast.LENGTH_LONG).show();
-
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getApplicationContext(), "Failure", Toast.LENGTH_LONG).show();
-            }
-        });*/
     }
 }
