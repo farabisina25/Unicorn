@@ -43,7 +43,7 @@
         android:id="@+id/radioButton18"
         android:layout_width="wrap_content"
         android:layout_height="28dp"
-        android:layout_marginStart="17dp"
+        android:layout_marginStart="32dp"
         android:layout_marginBottom="40dp"
         android:text="Lecture Book"
         app:layout_constraintBottom_toTopOf="@+id/textView16"
@@ -107,46 +107,46 @@
     <EditText
         android:id="@+id/editText6"
         android:layout_width="200dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="40dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="27dp"
+        android:layout_marginEnd="54dp"
         android:ems="10"
         android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/editText7"
-        app:layout_constraintStart_toEndOf="@+id/textView16" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioButton17" />
 
     <EditText
         android:id="@+id/editText7"
         android:layout_width="200dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginBottom="40dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="54dp"
         android:ems="10"
         android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/textView18"
-        app:layout_constraintStart_toEndOf="@+id/textView17" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText6" />
 
     <EditText
         android:id="@+id/editText9"
         android:layout_width="200dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginBottom="40dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="62dp"
         android:ems="10"
         android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/editText10"
-        app:layout_constraintStart_toEndOf="@+id/textView19" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText8" />
 
     <EditText
         android:id="@+id/editText10"
         android:layout_width="200dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginBottom="40dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="81dp"
         android:ems="10"
         android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/textView23"
-        app:layout_constraintStart_toEndOf="@+id/textView25" />
+        app:layout_constraintBottom_toTopOf="@+id/imageView5"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
         android:id="@+id/imageView5"
@@ -193,14 +193,13 @@
     <EditText
         android:id="@+id/editText8"
         android:layout_width="200dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginBottom="40dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="27dp"
+        android:layout_marginEnd="28dp"
         android:ems="10"
         android:inputType="text"
-        android:text="Name"
-        app:layout_constraintBottom_toTopOf="@+id/textView19"
-        app:layout_constraintStart_toEndOf="@+id/textView18" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText7" />
 
     <Button
         android:id="@+id/createBtn"
