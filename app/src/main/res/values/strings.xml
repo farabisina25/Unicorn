@@ -57,5 +57,6 @@
     <string name="mactv2">Sports</string>
     <string name="mactv3">Books</string>
     <string name="mactv4">Clubs</string>
+    <string name="name_surname1"><![CDATA[Name & Surname]]></string>
 
 </resources>

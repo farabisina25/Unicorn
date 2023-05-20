@@ -15,6 +15,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -22,8 +24,10 @@ import java.util.Map;
 
 public class BookInfo extends AppCompatActivity {
     FirebaseFirestore firestore;
+    FirebaseAuth mAuth;
+    FirebaseUser user;
     private final int GALLERY_REC_CODE = 1000;
-    String course;
+    String ownerName;
     String name;
     String author;
     String price;
@@ -48,6 +52,8 @@ public class BookInfo extends AppCompatActivity {
         setContentView(R.layout.activity_book_info);
 
         firestore = FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
 
         imageview = findViewById(R.id.imageView5);
 
@@ -85,7 +91,7 @@ public class BookInfo extends AppCompatActivity {
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setCourse(editText6.getText().toString());
+                setOwnerName(editText6.getText().toString());
                 setName(editText7.getText().toString());
                 setAuthor(editText8.getText().toString());
                 setPrice(editText9.getText().toString());
@@ -95,11 +101,12 @@ public class BookInfo extends AppCompatActivity {
 
                 Map<String,Object> book = new HashMap<>();
                 book.put("Type" , type);
-                book.put("Course" , course);
+                book.put("OwnerName" , ownerName);
                 book.put("Name" , name);
                 book.put("Author" , author);
                 book.put("Price" , price);
                 book.put("Comments" , comments);
+                book.put("ID" , user.getUid());
 
                 firestore.collection("Books").add(book);
             }
@@ -115,8 +122,8 @@ public class BookInfo extends AppCompatActivity {
             }
         }
     }
-    public void setCourse(String x){
-        course = x;
+    public void setOwnerName(String x){
+        ownerName = x;
     }
 
     public void setName(String x){
