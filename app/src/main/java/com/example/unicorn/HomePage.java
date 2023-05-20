@@ -67,8 +67,6 @@ public class HomePage extends AppCompatActivity {
     TextView actText4;
     Object[] acttexts;
 
-    RadioButton rb1;
-    RadioButton rb2;
     int i;
     @SuppressLint("MissingInflatedId")
     @Override
@@ -307,12 +305,11 @@ public class HomePage extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             i = 0;
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                if(i < 4){
                                     docRef = firestore.collection("Profiles").document(document.getId());
                                     docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                         @Override
                                         public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                            if(documentSnapshot.exists()){
+                                            if(documentSnapshot.exists() && i < 4){
                                                 String name = documentSnapshot.getData().get("NameLastname").toString();
                                                 ((TextView)textFields[i]).setText(name);
                                                 ((ImageButton)imageButtons[i]).setVisibility(View.VISIBLE);
@@ -321,7 +318,6 @@ public class HomePage extends AppCompatActivity {
                                         }
                                     });
 
-                                }
                             }
                         }
                     }
@@ -337,7 +333,7 @@ public class HomePage extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             i = 0;
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                if(i < 4){
+                                if(document.exists() && i < 4){
                                     String name = document.getData().get("Name").toString();
                                     ((TextView)acttexts[i]).setText(name);
                                     ((ImageButton)activities[i]).setVisibility(View.VISIBLE);

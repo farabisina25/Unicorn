@@ -11,7 +11,7 @@ import android.widget.RadioButton;
 
 public class EventsSubmenu extends AppCompatActivity {
     String eventtype;
-    ImageButton homepagebutton2;
+    ImageButton homepagebutton;
     RadioButton rb1;
     RadioButton rb2;
     RadioButton rb3;
@@ -21,13 +21,17 @@ public class EventsSubmenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_events_submenu);
 
-        homepagebutton2 = findViewById(R.id.homeBtn);
+        homepagebutton = findViewById(R.id.imageButton2);
 
         rb1 = findViewById(R.id.radioButton);
         rb2 = findViewById(R.id.radioButton3);
         rb3 = findViewById(R.id.radioButton4);
 
-        homepagebutton2.setOnClickListener(new View.OnClickListener() {
+        if(rb1.isChecked() || rb2.isChecked() || rb3.isChecked()){
+            setType();
+        }
+
+        homepagebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext() , HomePage.class);
@@ -35,10 +39,6 @@ public class EventsSubmenu extends AppCompatActivity {
                 finish();
             }
         });
-
-        if(rb1.isChecked() || rb2.isChecked() || rb3.isChecked()){
-            setType();
-        }
     }
 
     public void setType(){
