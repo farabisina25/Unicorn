@@ -224,7 +224,7 @@ public class RoommatesInfo extends AppCompatActivity {
                     else if(gender.equals("Woman")){rb2.setChecked(true);}
 
                     if(campus.equals("Main")){rb3.setChecked(true);}
-                    else if(gender.equals("East")){rb4.setChecked(true);}
+                    else if(campus.equals("East")){rb4.setChecked(true);}
 
                     if(workintheroom.equals("Yes")){rb5.setChecked(true);}
                     else if(workintheroom.equals("No")){rb6.setChecked(true);}

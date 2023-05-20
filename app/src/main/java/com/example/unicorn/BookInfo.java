@@ -109,6 +109,14 @@ public class BookInfo extends AppCompatActivity {
                 book.put("ID" , user.getUid());
 
                 firestore.collection("Books").add(book);
+
+                radioButton17.setChecked(false);
+                radioButton18.setChecked(false);
+                editText6.setText("");
+                editText7.setText("");
+                editText8.setText("");
+                editText9.setText("");
+                editText10.setText("");
             }
         });
     }

@@ -71,6 +71,14 @@ public class Activity extends AppCompatActivity {
                 activity.put("Type" , type);
 
                 firestore.collection("Activities").add(activity);
+
+                radioButton17.setChecked(false);
+                radioButton18.setChecked(false);
+                radioButton19.setChecked(false);
+                editText6.setText("");
+                editText7.setText("");
+                editText8.setText("");
+                editText5.setText("");
             }
         });
 
