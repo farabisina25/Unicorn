@@ -126,7 +126,7 @@ public class RoommatesInfo extends AppCompatActivity {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*if(saveBtn.getText().toString().equals("Edit")){
+                if(saveBtn.getText().toString().equals("Edit")){
                     setGender();
                     setCampus();
                     setWorkplace();
@@ -149,7 +149,7 @@ public class RoommatesInfo extends AppCompatActivity {
                     docRef.update("Roommate Count" , roommatecount);
                     docRef.update("Sleep Time" , sleeptime);
                     docRef.update("Get Up Time" , getuptime);
-                }*/
+                }
                 setGender();
                 setCampus();
                 setWorkplace();

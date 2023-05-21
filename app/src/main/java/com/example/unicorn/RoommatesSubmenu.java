@@ -29,11 +29,10 @@ public class RoommatesSubmenu extends AppCompatActivity {
     FirebaseAuth mAuth;
     FirebaseUser user;
     DocumentReference docRef;
-    int matchCount;
-    ArrayList<Integer> counts;
-    ArrayList<String> ids;
-    String[] IDArray = new String[4];
-    int[] CountArray = new int[4];
+    int[] counts;
+    String[] ids;
+    String[] IDArray;
+    int[] CountArray;
     ImageButton homepagebutton;
     ImageButton profile1;
     ImageButton profile2;
@@ -47,7 +46,7 @@ public class RoommatesSubmenu extends AppCompatActivity {
     TextView textView6;
     TextView textView7;
     TextView textView8;
-    TextView[] textViews = new TextView[8];
+    TextView[] textViews;
     String gender;
     String campus;
     String workintheroom;
@@ -70,6 +69,7 @@ public class RoommatesSubmenu extends AppCompatActivity {
     String sleeptime2;
     String getuptime2;
     String ID2;
+    int i;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +86,11 @@ public class RoommatesSubmenu extends AppCompatActivity {
         profile3 = findViewById(R.id.btn3);
         profile4 = findViewById(R.id.btn4);
 
+        ID = user.getUid();
+        IDArray = new String[4];
+        CountArray = new int[4];
+        counts = new int[50];
+        ids = new String[50];
         textView1 = findViewById(R.id.t1);
         textView2 = findViewById(R.id.t2);
         textView3 = findViewById(R.id.t3);
@@ -95,6 +100,7 @@ public class RoommatesSubmenu extends AppCompatActivity {
         textView7 = findViewById(R.id.t7);
         textView8 = findViewById(R.id.t8);
 
+        textViews = new TextView[8];
         textViews[0] = textView1;
         textViews[1] = textView2;
         textViews[2] = textView3;
@@ -104,15 +110,130 @@ public class RoommatesSubmenu extends AppCompatActivity {
         textViews[6] = textView7;
         textViews[7] = textView8;
 
-        ID = user.getUid();
+        for(int i = 0 ; i < counts.length ; i++){
+            counts[i] = 0;
+        }
+        firestore.collection("RoommateInfos").whereEqualTo("ID", ID).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        docRef = firestore.collection("RoommateInfos").document(document.getId());
+                        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            @Override
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                if(documentSnapshot.exists()){
+                                    gender = documentSnapshot.getData().get("Gender").toString();
+                                    campus = documentSnapshot.getData().get("Campus").toString();
+                                    workintheroom = documentSnapshot.getData().get("WorkPlace").toString();
+                                    smoke = documentSnapshot.getData().get("Smoke").toString();
+                                    cook = documentSnapshot.getData().get("Cook").toString();
+                                    instrument = documentSnapshot.getData().get("Instrument").toString();
+                                    sleeplight = documentSnapshot.getData().get("Sleep Light").toString();
+                                    roommatecount = documentSnapshot.getData().get("Roommate Count").toString();
+                                    sleeptime = documentSnapshot.getData().get("Sleep Time").toString();
+                                    getuptime = documentSnapshot.getData().get("Get Up Time").toString();
+                                }
+                            }
+                        });
 
-        counts = new ArrayList<>();
-        ids = new ArrayList<>();
+                    }
+                }
+            }
+        });
+        firestore.collection("RoommateInfos").whereNotEqualTo("ID", ID).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    i = 0;
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        docRef = firestore.collection("RoommateInfos").document(document.getId());
+                        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            @Override
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                if(documentSnapshot.exists()){
+                                    gender2 = documentSnapshot.getData().get("Gender").toString();
+                                    campus2 = documentSnapshot.getData().get("Campus").toString();
+                                    workintheroom2 = documentSnapshot.getData().get("WorkPlace").toString();
+                                    smoke2 = documentSnapshot.getData().get("Smoke").toString();
+                                    cook2 = documentSnapshot.getData().get("Cook").toString();
+                                    instrument2 = documentSnapshot.getData().get("Instrument").toString();
+                                    sleeplight2 = documentSnapshot.getData().get("Sleep Light").toString();
+                                    roommatecount2 = documentSnapshot.getData().get("Roommate Count").toString();
+                                    sleeptime2 = documentSnapshot.getData().get("Sleep Time").toString();
+                                    getuptime2 = documentSnapshot.getData().get("Get Up Time").toString();
+                                    ID2 = documentSnapshot.getData().get("ID").toString();
+                                    if(gender.equals(gender2)){
+                                        int temp = counts[i];
+                                        counts[i] = temp + 1;
+                                    }
+                                    if(campus.equals(campus2)){
+                                        int temp = counts[i];
+                                        counts[i] = temp + 1;
+                                    }
+                                    if(workintheroom.equals(workintheroom2)){
+                                        int temp = counts[i];
+                                        counts[i] = temp + 1;
+                                    }
+                                    if(smoke.equals(smoke2)){
+                                        int temp = counts[i];
+                                        counts[i] = temp + 1;
+                                    }
+                                    if(cook.equals(cook2)){
+                                        int temp = counts[i];
+                                        counts[i] = temp + 1;
+                                    }
+                                    if(instrument.equals(instrument2)){
+                                        int temp = counts[i];
+                                        counts[i] = temp + 1;
+                                    }
+                                    if(sleeplight.equals(sleeplight2)){
+                                        int temp = counts[i];
+                                        counts[i] = temp + 1;
+                                    }
+                                    if(roommatecount.equals(roommatecount2)){
+                                        int temp = counts[i];
+                                        counts[i] = temp + 1;
+                                    }
+                                    if(sleeptime.equals(sleeptime2)){
+                                        int temp = counts[i];
+                                        counts[i] = temp + 1;
+                                    }
+                                    if(getuptime.equals(getuptime2)){
+                                        int temp = counts[i];
+                                        counts[i] = temp + 1;
+                                    }
+                                    ids[i] = ID2;
+                                    i++;
+                                }
+                            }
+                        });
 
-        getInfos();
-        matchAll();
-        //setMatches();
-        //setTexts();
+                    }
+                }
+            }
+        });
+        /*for(int i = 0 ; i < 4 ; i++){
+            int max = 0;
+            int position = 0;
+            for(int j = 0 ; j < counts.length ; j++){
+                if(counts[j] > max){
+                    max = counts[j];
+                    position = j;
+                }
+            }
+            CountArray[i] = counts[position];
+            IDArray[i] = ids[position];
+            counts[position] = 0;
+        }
+        textView1.setText(IDArray[0]);
+        textView2.setText(String.valueOf(CountArray[0]));
+        textView3.setText(IDArray[1]);
+        textView4.setText(String.valueOf(CountArray[1]));
+        textView5.setText(IDArray[2]);
+        textView6.setText(String.valueOf(CountArray[2]));
+        textView7.setText(IDArray[3]);
+        textView8.setText(String.valueOf(CountArray[3]));*/
 
         homepagebutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,115 +277,7 @@ public class RoommatesSubmenu extends AppCompatActivity {
         });
     }
 
-    public void matchAll(){
-        firestore.collection("RoommateInfos")
-                .whereNotEqualTo("ID", ID)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                docRef = firestore.collection("RoommateInfos").document(document.getId());
-                                docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                                    @Override
-                                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                        if(documentSnapshot.exists()){
-                                            matchCount = 0;
-                                            gender2 = documentSnapshot.getData().get("Gender").toString();
-                                            campus2 = documentSnapshot.getData().get("Campus").toString();
-                                            workintheroom2 = documentSnapshot.getData().get("WorkPlace").toString();
-                                            smoke2 = documentSnapshot.getData().get("Smoke").toString();
-                                            cook2 = documentSnapshot.getData().get("Cook").toString();
-                                            instrument2 = documentSnapshot.getData().get("Instrument").toString();
-                                            sleeplight2 = documentSnapshot.getData().get("Sleep Light").toString();
-                                            roommatecount2 = documentSnapshot.getData().get("Roommate Count").toString();
-                                            sleeptime2 = documentSnapshot.getData().get("Sleep Time").toString();
-                                            getuptime2 = documentSnapshot.getData().get("Get Up Time").toString();
-                                            ID2 = documentSnapshot.getData().get("ID").toString();
+    public void getInfo(){
 
-                                            match(gender,gender2);
-                                            match(campus,campus2);
-                                            match(workintheroom,workintheroom2);
-                                            match(smoke,smoke2);
-                                            match(cook,cook2);
-                                            match(instrument,instrument2);
-                                            match(sleeplight,sleeplight2);
-                                            match(roommatecount,roommatecount2);
-                                            match(sleeplight,sleeplight2);
-                                            match(getuptime,getuptime2);
-
-                                            counts.add(matchCount);
-                                            ids.add(ID2);
-                                        }
-                                    }
-                                });
-
-                            }
-                        }
-                    }
-                });
-    }
-
-    public void match(String item, String item2){
-        if(item.equals(item2)){
-            matchCount++;
-        }
-    }
-
-    public void getInfos(){
-        firestore.collection("RoommateInfos")
-                .whereEqualTo("ID", ID)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                docRef = firestore.collection("RoommateInfos").document(document.getId());
-                                docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                                    @Override
-                                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                        if(documentSnapshot.exists()){
-                                            gender = documentSnapshot.getData().get("Gender").toString();
-                                            campus = documentSnapshot.getData().get("Campus").toString();
-                                            workintheroom = documentSnapshot.getData().get("WorkPlace").toString();
-                                            smoke = documentSnapshot.getData().get("Smoke").toString();
-                                            cook = documentSnapshot.getData().get("Cook").toString();
-                                            instrument = documentSnapshot.getData().get("Instrument").toString();
-                                            sleeplight = documentSnapshot.getData().get("Sleep Light").toString();
-                                            roommatecount = documentSnapshot.getData().get("Roommate Count").toString();
-                                            sleeptime = documentSnapshot.getData().get("Sleep Time").toString();
-                                            getuptime = documentSnapshot.getData().get("Get Up Time").toString();
-                                        }
-                                    }
-                                });
-
-                            }
-                        }
-                    }
-                });
-    }
-
-    public void setMatches(){
-        for(int i = 0 ; i < 4 ; i++){
-            int max = counts.get(0);
-            int position = 0;
-            for(int j = 1 ; j < counts.size() ; j++){
-                if(counts.get(j) > max){
-                    max = counts.get(j);
-                    position = j;
-                }
-            }
-            CountArray[i] = counts.get(position);
-            IDArray[i] = ids.get(position);
-            counts.set(position,0);
-        }
-    }
-
-    public void setTexts(){
-        for(int i = 0 ; i < 4 ; i= i+2){
-            textViews[i].setText(IDArray[0]);
-        }
     }
 }
