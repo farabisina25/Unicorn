@@ -149,7 +149,9 @@ public class EventsSubmenu2 extends AppCompatActivity {
         profileBut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext() , ProfilesSubmenu.class);
+                docRef = firestore.collection("Profiles").document(user.getUid());
+                docRef.update("ShowProfile", textView9.getText().toString());
+                Intent intent = new Intent(getApplicationContext() , ShowProfile.class);
                 startActivity(intent);
                 finish();
             }

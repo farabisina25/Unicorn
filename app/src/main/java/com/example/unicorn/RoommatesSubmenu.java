@@ -354,7 +354,9 @@ public class RoommatesSubmenu extends AppCompatActivity {
         profile1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext() , ProfilesSubmenu.class);
+                docRef = firestore.collection("Profiles").document(user.getUid());
+                docRef.update("ShowProfile", textView1.getText().toString());
+                Intent intent = new Intent(getApplicationContext() , ShowProfile.class);
                 startActivity(intent);
                 finish();
             }
@@ -362,7 +364,9 @@ public class RoommatesSubmenu extends AppCompatActivity {
         profile2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext() , ProfilesSubmenu.class);
+                docRef = firestore.collection("Profiles").document(user.getUid());
+                docRef.update("ShowProfile", textView3.getText().toString());
+                Intent intent = new Intent(getApplicationContext() , ShowProfile.class);
                 startActivity(intent);
                 finish();
             }
@@ -370,7 +374,9 @@ public class RoommatesSubmenu extends AppCompatActivity {
         profile3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext() , ProfilesSubmenu.class);
+                docRef = firestore.collection("Profiles").document(user.getUid());
+                docRef.update("ShowProfile", textView5.getText().toString());
+                Intent intent = new Intent(getApplicationContext() , ShowProfile.class);
                 startActivity(intent);
                 finish();
             }
@@ -378,7 +384,9 @@ public class RoommatesSubmenu extends AppCompatActivity {
         profile4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext() , ProfilesSubmenu.class);
+                docRef = firestore.collection("Profiles").document(user.getUid());
+                docRef.update("ShowProfile", textView7.getText().toString());
+                Intent intent = new Intent(getApplicationContext() , ShowProfile.class);
                 startActivity(intent);
                 finish();
             }

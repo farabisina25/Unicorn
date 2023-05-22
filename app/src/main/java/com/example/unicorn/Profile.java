@@ -151,6 +151,8 @@ public class Profile extends AppCompatActivity {
                     profile.put("Birth" , BirthDate);
                     profile.put("Department" , Department);
                     profile.put("ID" , user.getUid());
+                    profile.put("ShowProfile" , "");
+                    profile.put("ChatProfile" , "");
 
                     Profiles.document(user.getUid()).set(profile);
 
