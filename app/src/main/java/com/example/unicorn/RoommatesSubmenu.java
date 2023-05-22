@@ -35,6 +35,7 @@ public class RoommatesSubmenu extends AppCompatActivity {
     int[] counts;
     String[] ids;
     String[] IDArray;
+    String[] NameArray;
     int[] CountArray;
     TextView[] textViews;
     TextView[] textViews2;
@@ -81,23 +82,19 @@ public class RoommatesSubmenu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_roommates_submenu);
-
         firestore = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
-
         homepagebutton = findViewById(R.id.homeBtn);
         profile1 = findViewById(R.id.btn1);
         profile2 = findViewById(R.id.btn2);
         profile3 = findViewById(R.id.btn3);
         profile4 = findViewById(R.id.btn4);
-
         ID = user.getUid();
         IDArray = new String[4];
         CountArray = new int[4];
         counts = new int[50];
         ids = new String[50];
-
         textView1 = findViewById(R.id.t1);
         textView2 = findViewById(R.id.t2);
         textView3 = findViewById(R.id.t3);
@@ -106,7 +103,6 @@ public class RoommatesSubmenu extends AppCompatActivity {
         textView6 = findViewById(R.id.t6);
         textView7 = findViewById(R.id.t7);
         textView8 = findViewById(R.id.t8);
-
         textViews = new TextView[4];
         textViews2 = new TextView[4];
         textViews[0] = textView1;
@@ -117,12 +113,9 @@ public class RoommatesSubmenu extends AppCompatActivity {
         textViews2[1] = textView4;
         textViews2[2] = textView6;
         textViews2[3] = textView8;
-
         but1 = findViewById(R.id.but1);
         but2 = findViewById(R.id.but2);
-
         ArrayList<String> NameLastnames = new ArrayList<>();
-
         Arrays.fill(counts, 0);
 
         firestore.collection("RoommateInfos").whereEqualTo("ID", ID).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -220,15 +213,14 @@ public class RoommatesSubmenu extends AppCompatActivity {
                 });
             }
         });
-
         but1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for(int i = 0 ; i < 4 ; i++){
+                for (int i = 0; i < 4; i++) {
                     int max = 0;
                     int position = 0;
-                    for(int j = 0 ; j < counts.length ; j++){
-                        if(counts[j] > max){
+                    for (int j = 0; j < counts.length; j++) {
+                        if (counts[j] > max) {
                             max = counts[j];
                             position = j;
                         }
@@ -237,112 +229,90 @@ public class RoommatesSubmenu extends AppCompatActivity {
                     IDArray[i] = ids[position];
                     counts[position] = 0;
                 }
-                firestore.collection("Profiles").whereEqualTo("ID", IDArray[0]).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                /*docRef = firestore.collection("Profiles").document(IDArray[0]);
+                docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()){
-                                docRef = firestore.collection("Profiles").document(document.getId());
-                                docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                                    @Override
-                                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                        if(documentSnapshot.exists()){
-                                            NameLastnames.add(documentSnapshot.getData().get("NameLastname").toString());
-                                        }
-                                    }
-                                });
-
-                            }
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if(documentSnapshot.exists()){
+                            NameArray[0] = documentSnapshot.getData().get("NameLastname").toString();
                         }
                     }
-                }).addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                }).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
-                    public void onComplete(@androidx.annotation.NonNull Task<QuerySnapshot> task) {
-                        firestore.collection("Profiles").whereEqualTo("ID", IDArray[1]).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    public void onComplete(@androidx.annotation.NonNull Task<DocumentSnapshot> task) {
+                        docRef = firestore.collection("Profiles").document(IDArray[1]);
+                        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                             @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    for (QueryDocumentSnapshot document : task.getResult()){
-                                        docRef = firestore.collection("Profiles").document(document.getId());
-                                        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                                            @Override
-                                            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                                if(documentSnapshot.exists()){
-                                                    NameLastnames.add(documentSnapshot.getData().get("NameLastname").toString());
-                                                }
-                                            }
-                                        });
-
-                                    }
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                if(documentSnapshot.exists()){
+                                    NameArray[1] = documentSnapshot.getData().get("NameLastname").toString();
                                 }
                             }
                         });
                     }
-                }).addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                }).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
-                    public void onComplete(@androidx.annotation.NonNull Task<QuerySnapshot> task) {
-                        firestore.collection("Profiles").whereEqualTo("ID", IDArray[2]).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    public void onComplete(@androidx.annotation.NonNull Task<DocumentSnapshot> task) {
+                        docRef = firestore.collection("Profiles").document(IDArray[2]);
+                        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                             @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    for (QueryDocumentSnapshot document : task.getResult()){
-                                        docRef = firestore.collection("Profiles").document(document.getId());
-                                        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                                            @Override
-                                            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                                if(documentSnapshot.exists()){
-                                                    NameLastnames.add(documentSnapshot.getData().get("NameLastname").toString());
-                                                }
-                                            }
-                                        });
-
-                                    }
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                if(documentSnapshot.exists()){
+                                    NameArray[2] = documentSnapshot.getData().get("NameLastname").toString();
                                 }
                             }
                         });
                     }
-                }).addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                }).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
-                    public void onComplete(@androidx.annotation.NonNull Task<QuerySnapshot> task) {
-                        firestore.collection("Profiles").whereEqualTo("ID", IDArray[3]).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    public void onComplete(@androidx.annotation.NonNull Task<DocumentSnapshot> task) {
+                        docRef = firestore.collection("Profiles").document(IDArray[3]);
+                        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                             @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    for (QueryDocumentSnapshot document : task.getResult()){
-                                        docRef = firestore.collection("Profiles").document(document.getId());
-                                        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                                            @Override
-                                            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                                if(documentSnapshot.exists()){
-                                                    NameLastnames.add(documentSnapshot.getData().get("NameLastname").toString());
-                                                }
-                                            }
-                                        });
-
-                                    }
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                if(documentSnapshot.exists()){
+                                    NameArray[3] = documentSnapshot.getData().get("NameLastname").toString();
                                 }
                             }
                         });
                     }
-                });
+                });*/
+                for (int i = 0; i < IDArray.length; i++) {
+                    firestore.collection("Profiles").whereEqualTo("ID", IDArray[i]).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    docRef = firestore.collection("Profiles").document(document.getId());
+                                    docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                        @Override
+                                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                            if (documentSnapshot.exists()) {
+                                                NameLastnames.add(documentSnapshot.getData().get("NameLastname").toString());
+                                            }
+                                        }
+                                    });
+
+                                }
+                            }
+                        }
+                    });
+                }
             }
         });
-
         but2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                textView1.setText(NameLastnames.get(0));
+                textView1.setText(NameArray[0]);
                 textView2.setText("%" + (CountArray[0] * 10) + " Matching");
-                textView3.setText(NameLastnames.get(1));
+                textView3.setText(NameArray[1]);
                 textView4.setText("%" + (CountArray[1] * 10) + " Matching");
-                textView5.setText(NameLastnames.get(2));
+                textView5.setText(NameArray[2]);
                 textView6.setText("%" + (CountArray[2] * 10) + " Matching");
-                textView7.setText(NameLastnames.get(3));
+                textView7.setText(NameArray[3]);
                 textView8.setText("%" + (CountArray[3] * 10) + " Matching");
             }
         });
-
-
         homepagebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
