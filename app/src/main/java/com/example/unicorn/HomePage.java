@@ -138,6 +138,8 @@ public class HomePage extends AppCompatActivity {
         activities[2] = activity3;
         activities[3] = activity4;
 
+        set();
+
         docRef2 = firestore.collection("Profiles").document(user.getUid());
         docRef2.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
@@ -147,7 +149,6 @@ public class HomePage extends AppCompatActivity {
                 }
             }
         });
-        set();
         activity1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

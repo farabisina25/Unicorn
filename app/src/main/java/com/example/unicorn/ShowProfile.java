@@ -114,7 +114,9 @@ public class ShowProfile extends AppCompatActivity {
         chatBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext() , Chat.class);
+                docRef = firestore.collection("Profiles").document(user.getUid());
+                docRef.update("ChatProfile", textView5.getText().toString());
+                Intent intent = new Intent(getApplicationContext() , InnerChat.class);
                 startActivity(intent);
                 finish();
             }
