@@ -26,6 +26,8 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class RoommatesSubmenu extends AppCompatActivity {
     FirebaseFirestore firestore;
@@ -54,6 +56,7 @@ public class RoommatesSubmenu extends AppCompatActivity {
     TextView textView8;
     Button but1;
     Button but2;
+    Button but3;
     String gender;
     String campus;
     String workintheroom;
@@ -115,6 +118,7 @@ public class RoommatesSubmenu extends AppCompatActivity {
         textViews2[3] = textView8;
         but1 = findViewById(R.id.but1);
         but2 = findViewById(R.id.but2);
+        but3 = findViewById(R.id.but3);
         ArrayList<String> NameLastnames = new ArrayList<>();
         Arrays.fill(counts, 0);
 
@@ -229,59 +233,17 @@ public class RoommatesSubmenu extends AppCompatActivity {
                     IDArray[i] = ids[position];
                     counts[position] = 0;
                 }
-                /*docRef = firestore.collection("Profiles").document(IDArray[0]);
-                docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        if(documentSnapshot.exists()){
-                            NameArray[0] = documentSnapshot.getData().get("NameLastname").toString();
-                        }
-                    }
-                }).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@androidx.annotation.NonNull Task<DocumentSnapshot> task) {
-                        docRef = firestore.collection("Profiles").document(IDArray[1]);
-                        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                            @Override
-                            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                if(documentSnapshot.exists()){
-                                    NameArray[1] = documentSnapshot.getData().get("NameLastname").toString();
-                                }
-                            }
-                        });
-                    }
-                }).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@androidx.annotation.NonNull Task<DocumentSnapshot> task) {
-                        docRef = firestore.collection("Profiles").document(IDArray[2]);
-                        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                            @Override
-                            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                if(documentSnapshot.exists()){
-                                    NameArray[2] = documentSnapshot.getData().get("NameLastname").toString();
-                                }
-                            }
-                        });
-                    }
-                }).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@androidx.annotation.NonNull Task<DocumentSnapshot> task) {
-                        docRef = firestore.collection("Profiles").document(IDArray[3]);
-                        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                            @Override
-                            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                if(documentSnapshot.exists()){
-                                    NameArray[3] = documentSnapshot.getData().get("NameLastname").toString();
-                                }
-                            }
-                        });
-                    }
-                });*/
+            }
+        });
+        but2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 for (int i = 0; i < IDArray.length; i++) {
                     firestore.collection("Profiles").whereEqualTo("ID", IDArray[i]).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             if (task.isSuccessful()) {
+                                int i = 0;
                                 for (QueryDocumentSnapshot document : task.getResult()) {
                                     docRef = firestore.collection("Profiles").document(document.getId());
                                     docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -300,16 +262,16 @@ public class RoommatesSubmenu extends AppCompatActivity {
                 }
             }
         });
-        but2.setOnClickListener(new View.OnClickListener() {
+        but3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                textView1.setText(NameArray[0]);
+                textView1.setText(NameLastnames.get(0));
                 textView2.setText("%" + (CountArray[0] * 10) + " Matching");
-                textView3.setText(NameArray[1]);
+                textView3.setText(NameLastnames.get(1));
                 textView4.setText("%" + (CountArray[1] * 10) + " Matching");
-                textView5.setText(NameArray[2]);
+                textView5.setText(NameLastnames.get(2));
                 textView6.setText("%" + (CountArray[2] * 10) + " Matching");
-                textView7.setText(NameArray[3]);
+                textView7.setText(NameLastnames.get(3));
                 textView8.setText("%" + (CountArray[3] * 10) + " Matching");
             }
         });

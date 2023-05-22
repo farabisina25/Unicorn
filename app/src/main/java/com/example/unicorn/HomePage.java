@@ -280,49 +280,49 @@ public class HomePage extends AppCompatActivity {
         });
     }
     public void set(){
-        firestore.collection("Profiles").whereNotEqualTo("ID", user.getUid()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        firestore.collection("Activities")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             i = 0;
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                docRef = firestore.collection("Profiles").document(document.getId());
-                                docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                                    @Override
-                                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                        if(documentSnapshot.exists() && i < 4){
-                                            String name = documentSnapshot.getData().get("NameLastname").toString();
-                                            ((TextView)textFields[i]).setText(name);
-                                            ((ImageButton)imageButtons[i]).setVisibility(View.VISIBLE);
-                                            i++;
-                                        }
-                                    }
-                                });
-
+                                if(document.exists() && i < 4){
+                                    String name = document.getData().get("Name").toString();
+                                    ((TextView)acttexts[i]).setText(name);
+                                    ((ImageButton)activities[i]).setVisibility(View.VISIBLE);
+                                    i++;
+                                }
                             }
                         }
                     }
                 }).addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@androidx.annotation.NonNull Task<QuerySnapshot> task) {
-                        firestore.collection("Activities")
-                                .get()
-                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                        if (task.isSuccessful()) {
-                                            i = 0;
-                                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                                if(document.exists() && i < 4){
-                                                    String name = document.getData().get("Name").toString();
-                                                    ((TextView)acttexts[i]).setText(name);
-                                                    ((ImageButton)activities[i]).setVisibility(View.VISIBLE);
+                        firestore.collection("Profiles").whereNotEqualTo("ID", user.getUid()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    i = 0;
+                                    for (QueryDocumentSnapshot document : task.getResult()) {
+                                        docRef = firestore.collection("Profiles").document(document.getId());
+                                        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                                if(documentSnapshot.exists() && i < 4){
+                                                    String name = documentSnapshot.getData().get("NameLastname").toString();
+                                                    ((TextView)textFields[i]).setText(name);
+                                                    ((ImageButton)imageButtons[i]).setVisibility(View.VISIBLE);
                                                     i++;
                                                 }
                                             }
-                                        }
+                                        });
+
                                     }
-                                });
+                                }
+                            }
+                        });
                     }
                 });
     }
