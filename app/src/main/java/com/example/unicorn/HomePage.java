@@ -147,20 +147,7 @@ public class HomePage extends AppCompatActivity {
                 }
             }
         });
-        textView17.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setProfiles();
-            }
-        });
-
-        textView19.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setActivities();
-            }
-        });
-
+        set();
         activity1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -201,7 +188,6 @@ public class HomePage extends AppCompatActivity {
                 finish();
             }
         });
-
         Profile2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -210,7 +196,6 @@ public class HomePage extends AppCompatActivity {
                 finish();
             }
         });
-
         Profile3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -219,7 +204,6 @@ public class HomePage extends AppCompatActivity {
                 finish();
             }
         });
-
         Profile4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -228,7 +212,6 @@ public class HomePage extends AppCompatActivity {
                 finish();
             }
         });
-
         button7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -237,7 +220,6 @@ public class HomePage extends AppCompatActivity {
                 finish();
             }
         });
-
         button8.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -246,7 +228,6 @@ public class HomePage extends AppCompatActivity {
                 finish();
             }
         });
-
         button9.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -255,7 +236,6 @@ public class HomePage extends AppCompatActivity {
                 finish();
             }
         });
-
         button11.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -264,7 +244,6 @@ public class HomePage extends AppCompatActivity {
                 finish();
             }
         });
-
         button12.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -273,7 +252,6 @@ public class HomePage extends AppCompatActivity {
                 finish();
             }
         });
-
         button13.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -283,7 +261,6 @@ public class HomePage extends AppCompatActivity {
                 finish();
             }
         });
-
         button14.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -292,9 +269,8 @@ public class HomePage extends AppCompatActivity {
                 finish();
             }
         });
-
     }
-    public void setProfiles(){
+    public void set(){
         firestore.collection("Profiles")
                 .whereNotEqualTo("ID", user.getUid())
                 .get()
@@ -304,42 +280,43 @@ public class HomePage extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             i = 0;
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                    docRef = firestore.collection("Profiles").document(document.getId());
-                                    docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                                        @Override
-                                        public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                            if(documentSnapshot.exists() && i < 4){
-                                                String name = documentSnapshot.getData().get("NameLastname").toString();
-                                                ((TextView)textFields[i]).setText(name);
-                                                ((ImageButton)imageButtons[i]).setVisibility(View.VISIBLE);
-                                                i++;
-                                            }
+                                docRef = firestore.collection("Profiles").document(document.getId());
+                                docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                        if(documentSnapshot.exists() && i < 4){
+                                            String name = documentSnapshot.getData().get("NameLastname").toString();
+                                            ((TextView)textFields[i]).setText(name);
+                                            ((ImageButton)imageButtons[i]).setVisibility(View.VISIBLE);
+                                            i++;
                                         }
-                                    });
+                                    }
+                                });
 
                             }
                         }
                     }
-                });
-    }
-
-    public void setActivities(){
-        firestore.collection("Activities")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                }).addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            i = 0;
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                if(document.exists() && i < 4){
-                                    String name = document.getData().get("Name").toString();
-                                    ((TextView)acttexts[i]).setText(name);
-                                    ((ImageButton)activities[i]).setVisibility(View.VISIBLE);
-                                    i++;
-                                }
-                            }
-                        }
+                    public void onComplete(@androidx.annotation.NonNull Task<QuerySnapshot> task) {
+                        firestore.collection("Activities")
+                                .get()
+                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                        if (task.isSuccessful()) {
+                                            i = 0;
+                                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                                if(document.exists() && i < 4){
+                                                    String name = document.getData().get("Name").toString();
+                                                    ((TextView)acttexts[i]).setText(name);
+                                                    ((ImageButton)activities[i]).setVisibility(View.VISIBLE);
+                                                    i++;
+                                                }
+                                            }
+                                        }
+                                    }
+                                });
                     }
                 });
     }
