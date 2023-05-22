@@ -232,21 +232,23 @@
 
     <Button
         android:id="@+id/but1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="97dp"
+        android:layout_height="37dp"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="50dp"
-        android:text="Button"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="#9DAAF6"
+        android:text="First"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/but2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_width="97dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="100dp"
-        android:text="Button"
+        android:backgroundTint="#9DAAF6"
+        android:text="Second"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

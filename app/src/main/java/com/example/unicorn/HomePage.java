@@ -271,10 +271,7 @@ public class HomePage extends AppCompatActivity {
         });
     }
     public void set(){
-        firestore.collection("Profiles")
-                .whereNotEqualTo("ID", user.getUid())
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        firestore.collection("Profiles").whereNotEqualTo("ID", user.getUid()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
