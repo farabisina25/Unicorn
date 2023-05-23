@@ -34,10 +34,14 @@ public class RoommatesSubmenu extends AppCompatActivity {
     FirebaseAuth mAuth;
     FirebaseUser user;
     DocumentReference docRef;
+    CollectionReference IDs;
     int[] counts;
     String[] ids;
     String[] IDArray;
-    String[] NameArray;
+    String name1;
+    String name2;
+    String name3;
+    String name4;
     int[] CountArray;
     TextView[] textViews;
     TextView[] textViews2;
@@ -88,6 +92,7 @@ public class RoommatesSubmenu extends AppCompatActivity {
         firestore = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
+        IDs = firestore.collection("IDs");
         homepagebutton = findViewById(R.id.homeBtn);
         profile1 = findViewById(R.id.btn1);
         profile2 = findViewById(R.id.btn2);
@@ -202,8 +207,8 @@ public class RoommatesSubmenu extends AppCompatActivity {
                                             if (getuptime.equals(getuptime2)) {
                                                 count++;
                                             }
-                                            if (gender.equals(gender2)) {
-                                                count++;
+                                            if (!gender.equals(gender2)) {
+                                                count = 0;
                                             }
                                             counts[i] = count;
                                             i++;
@@ -233,45 +238,80 @@ public class RoommatesSubmenu extends AppCompatActivity {
                     IDArray[i] = ids[position];
                     counts[position] = 0;
                 }
+                DocumentReference docRef = firestore.collection("Profiles").document(IDArray[0]);
+                docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                name1 = document.getData().get("NameLastname").toString();
+                            }
+                        }
+                    }
+                });
+                DocumentReference docRef2 = firestore.collection("Profiles").document(IDArray[1]);
+                docRef2.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                name2 = document.getData().get("NameLastname").toString();
+                            }
+                        }
+                    }
+                });
+                DocumentReference docRef3 = firestore.collection("Profiles").document(IDArray[2]);
+                docRef3.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                name3 = document.getData().get("NameLastname").toString();
+                            }
+                        }
+                    }
+                });
+                DocumentReference docRef4 = firestore.collection("Profiles").document(IDArray[3]);
+                docRef4.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                name4 = document.getData().get("NameLastname").toString();
+                            }
+                        }
+                    }
+                });
             }
         });
         but2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (int i = 0; i < IDArray.length; i++) {
-                    firestore.collection("Profiles").whereEqualTo("ID", IDArray[i]).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                            if (task.isSuccessful()) {
-                                int i = 0;
-                                for (QueryDocumentSnapshot document : task.getResult()) {
-                                    docRef = firestore.collection("Profiles").document(document.getId());
-                                    docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                                        @Override
-                                        public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                            if (documentSnapshot.exists()) {
-                                                NameLastnames.add(documentSnapshot.getData().get("NameLastname").toString());
-                                            }
-                                        }
-                                    });
-
-                                }
-                            }
-                        }
-                    });
-                }
+                textView1.setText(name1);
+                textView2.setText("%" + (CountArray[0] * 10) + " Matching");
+                textView3.setText(name2);
+                textView4.setText("%" + (CountArray[1] * 10) + " Matching");
+                textView5.setText(name3);
+                textView6.setText("%" + (CountArray[2] * 10) + " Matching");
+                textView7.setText(name4);
+                textView8.setText("%" + (CountArray[3] * 10) + " Matching");
             }
         });
+
         but3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                textView1.setText(NameLastnames.get(0));
+                textView1.setText(name1);
                 textView2.setText("%" + (CountArray[0] * 10) + " Matching");
-                textView3.setText(NameLastnames.get(1));
+                textView3.setText(name2);
                 textView4.setText("%" + (CountArray[1] * 10) + " Matching");
-                textView5.setText(NameLastnames.get(2));
+                textView5.setText(name3);
                 textView6.setText("%" + (CountArray[2] * 10) + " Matching");
-                textView7.setText(NameLastnames.get(3));
+                textView7.setText(name4);
                 textView8.setText("%" + (CountArray[3] * 10) + " Matching");
             }
         });
