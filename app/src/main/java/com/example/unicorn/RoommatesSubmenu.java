@@ -43,8 +43,6 @@ public class RoommatesSubmenu extends AppCompatActivity {
     String name3;
     String name4;
     int[] CountArray;
-    TextView[] textViews;
-    TextView[] textViews2;
     ImageButton homepagebutton;
     ImageButton profile1;
     ImageButton profile2;
@@ -60,7 +58,6 @@ public class RoommatesSubmenu extends AppCompatActivity {
     TextView textView8;
     Button but1;
     Button but2;
-    Button but3;
     String gender;
     String campus;
     String workintheroom;
@@ -111,19 +108,8 @@ public class RoommatesSubmenu extends AppCompatActivity {
         textView6 = findViewById(R.id.t6);
         textView7 = findViewById(R.id.t7);
         textView8 = findViewById(R.id.t8);
-        textViews = new TextView[4];
-        textViews2 = new TextView[4];
-        textViews[0] = textView1;
-        textViews[1] = textView3;
-        textViews[2] = textView5;
-        textViews[3] = textView7;
-        textViews2[0] = textView2;
-        textViews2[1] = textView4;
-        textViews2[2] = textView6;
-        textViews2[3] = textView8;
         but1 = findViewById(R.id.but1);
         but2 = findViewById(R.id.but2);
-        but3 = findViewById(R.id.but3);
         ArrayList<String> NameLastnames = new ArrayList<>();
         Arrays.fill(counts, 0);
 
@@ -289,20 +275,6 @@ public class RoommatesSubmenu extends AppCompatActivity {
             }
         });
         but2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                textView1.setText(name1);
-                textView2.setText("%" + (CountArray[0] * 10) + " Matching");
-                textView3.setText(name2);
-                textView4.setText("%" + (CountArray[1] * 10) + " Matching");
-                textView5.setText(name3);
-                textView6.setText("%" + (CountArray[2] * 10) + " Matching");
-                textView7.setText(name4);
-                textView8.setText("%" + (CountArray[3] * 10) + " Matching");
-            }
-        });
-
-        but3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 textView1.setText(name1);

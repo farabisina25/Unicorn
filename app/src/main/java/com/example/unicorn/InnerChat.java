@@ -127,14 +127,14 @@ public class InnerChat extends AppCompatActivity {
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                docRef = firestore.collection("Profiles").document(user.getUid());
-                docRef.update(myName + "to" + messageName + 1, textView3.getText().toString());
-                docRef.update(myName + "to" + messageName + 2, textView5.getText().toString());
-                docRef.update(myName + "to" + messageName + 3, editText.getText().toString());
-
                 image.setVisibility(View.VISIBLE);
                 textView6.setText(editText.getText());
                 editText.setText("");
+
+                docRef = firestore.collection("Messages").document(user.getUid());
+                docRef.update(myName + "to" + messageName + 1, textView2.getText().toString());
+                docRef.update(myName + "to" + messageName + 2, textView4.getText().toString());
+                docRef.update(myName + "to" + messageName + 3, editText.getText().toString());
             }
         });
 
