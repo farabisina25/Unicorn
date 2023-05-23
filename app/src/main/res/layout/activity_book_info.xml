@@ -93,17 +93,6 @@
         app:layout_constraintBottom_toTopOf="@+id/textView25"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/textView23"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="30dp"
-        android:text="Photo of the book:"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/imageView5"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <EditText
         android:id="@+id/editText6"
         android:layout_width="200dp"
@@ -141,22 +130,12 @@
         android:id="@+id/editText10"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="14dp"
-        android:layout_marginBottom="81dp"
         android:ems="10"
         android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/imageView5"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="218dp"
-        android:layout_height="182dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginBottom="28dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_gallery" />
+        app:layout_constraintTop_toBottomOf="@+id/editText9" />
 
     <ImageButton
         android:id="@+id/profileBtn"
@@ -184,10 +163,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="44dp"
+        android:layout_marginBottom="30dp"
         android:text="Comments about the book:"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textView23"
+        app:layout_constraintBottom_toTopOf="@+id/textView72"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
@@ -205,20 +184,71 @@
         android:id="@+id/createBtn"
         android:layout_width="97dp"
         android:layout_height="86dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginTop="70dp"
         android:text="Create Book"
+        app:layout_constraintEnd_toStartOf="@+id/textView72"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView25" />
+
+    <TextView
+        android:id="@+id/textView72"
+        android:layout_width="259dp"
+        android:layout_height="273dp"
+        android:background="#A5B1F3"
+        android:editable="false"
+        android:enabled="false"
+        android:focusable="false"
+        android:forceHasOverlappingRendering="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textView73"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="40dp"
+        android:text="Enter The Name Of The Book You Want To Delete:"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/textView72"
+        app:layout_constraintStart_toStartOf="@+id/textView72"
+        app:layout_constraintTop_toTopOf="@+id/textView72" />
+
+    <AutoCompleteTextView
+        android:id="@+id/act3"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/textView72"
+        app:layout_constraintStart_toStartOf="@+id/textView72"
+        app:layout_constraintTop_toBottomOf="@+id/textView73" />
+
+    <Button
+        android:id="@+id/deleteBtn"
+        android:layout_width="97dp"
+        android:layout_height="86dp"
+        android:backgroundTint="#F87575"
+        android:text="Delete Book"
+        app:layout_constraintBottom_toBottomOf="@+id/textView72"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textView72"
+        app:layout_constraintTop_toBottomOf="@+id/act3" />
+
+    <TextView
+        android:id="@+id/textView74"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@color/material_dynamic_primary30"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/uploadBtn"
-        android:layout_width="98dp"
-        android:layout_height="82dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginBottom="10dp"
-        android:text="Upload Image"
-        app:layout_constraintBottom_toTopOf="@+id/createBtn"
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/book_open_page_variant"
+        app:layout_constraintBottom_toBottomOf="@+id/textView74"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -15,9 +17,15 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -43,8 +51,9 @@ public class BookInfo extends AppCompatActivity {
     EditText editText10;
     ImageButton profileButton;
     Button createButton;
-    Button uploadButton;
-
+    Button deleteButton;
+    AutoCompleteTextView actw;
+    String[] books;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,21 +63,23 @@ public class BookInfo extends AppCompatActivity {
         firestore = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
-
         imageview = findViewById(R.id.imageView5);
-
         radioButton17 = findViewById(R.id.radioButton17);
         radioButton18 = findViewById(R.id.radioButton18);
-
         editText6 = findViewById(R.id.editText6);
         editText7 = findViewById(R.id.editText7);
         editText8 = findViewById(R.id.editText8);
         editText9 = findViewById(R.id.editText9);
         editText10 = findViewById(R.id.editText10);
-
+        actw = findViewById(R.id.act3);
         profileButton = findViewById(R.id.profileBtn);
         createButton = findViewById(R.id.createBtn);
-        uploadButton = findViewById(R.id.uploadBtn);
+        deleteButton = findViewById(R.id.deleteBtn);
+        books = new String[50];
+
+        setBooks();
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, books);
+        actw.setAdapter(adapter);
 
         profileButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,12 +90,31 @@ public class BookInfo extends AppCompatActivity {
             }
         });
 
-        uploadButton.setOnClickListener(new View.OnClickListener() {
+        deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent iGallery = new Intent(Intent.ACTION_PICK);
-                iGallery.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(iGallery, GALLERY_REC_CODE);
+                if(actw.getText().toString().equals("")){
+                    //Do Nothing
+                }
+                else{
+                    String name = actw.getText().toString();
+                    firestore.collection("Books")
+                            .whereEqualTo("Name" , name)
+                            .get()
+                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        for (QueryDocumentSnapshot document : task.getResult()) {
+                                            if(document.exists()){
+                                                firestore.collection("Books").document(document.getId()).delete();
+                                            }
+                                        }
+                                    }
+                                }
+                            });
+                }
+                actw.setText("");
             }
         });
 
@@ -120,16 +150,6 @@ public class BookInfo extends AppCompatActivity {
             }
         });
     }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if(resultCode == RESULT_OK){
-            if(requestCode == GALLERY_REC_CODE){
-                imageview.setImageURI(data.getData());
-            }
-        }
-    }
     public void setOwnerName(String x){
         ownerName = x;
     }
@@ -150,7 +170,28 @@ public class BookInfo extends AppCompatActivity {
         comments = x;
     }
 
-    public void uploadPhoto(){
-
+    public void setBooks(){
+        firestore.collection("Books")
+                .whereEqualTo("ID" , user.getUid())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            int i= 0;
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                if(document.exists()){
+                                    books[i] = document.getData().get("Name").toString();
+                                    i++;
+                                }
+                            }
+                        }
+                    }
+                });
+        for(int i = 0 ; i< 50 ; i++){
+            if(books[i] == null){
+                books[i] = "!";
+            }
+        }
     }
 }
