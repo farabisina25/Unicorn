@@ -126,7 +126,7 @@ public class RoommatesInfo extends AppCompatActivity {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(saveBtn.getText().toString().equals("Edit")){
+                if(saveBtn.getText().toString().equals("Finish Editting")){
                     setGender();
                     setCampus();
                     setWorkplace();
@@ -149,33 +149,80 @@ public class RoommatesInfo extends AppCompatActivity {
                     docRef.update("Roommate Count" , roommatecount);
                     docRef.update("Sleep Time" , sleeptime);
                     docRef.update("Get Up Time" , getuptime);
+                    saveBtn.setText("Edit");
+                    isRoommateCreated();
                 }
-                setGender();
-                setCampus();
-                setWorkplace();
-                setSmoke();
-                setCook();
-                setInstrument();
-                setSleepLight();
-                RoommateCount();
-                SleepTime(editText1.getText().toString());
-                getUpTime(editText2.getText().toString());
+                else if(saveBtn.getText().toString().equals("Edit")){
+                    rb1.setChecked(false);
+                    rb2.setChecked(false);
+                    rb3.setChecked(false);
+                    rb4.setChecked(false);
+                    rb5.setChecked(false);
+                    rb6.setChecked(false);
+                    rb7.setChecked(false);
+                    rb8.setChecked(false);
+                    rb9.setChecked(false);
+                    rb10.setChecked(false);
+                    rb11.setChecked(false);
+                    rb12.setChecked(false);
+                    rb13.setChecked(false);
+                    rb14.setChecked(false);
+                    rb15.setChecked(false);
+                    checkBox1.setChecked(false);
+                    checkBox2.setChecked(false);
+                    checkBox3.setChecked(false);
+                    editText1.setText("");
+                    editText2.setText("");
+                    rb1.setClickable(true);
+                    rb2.setClickable(true);
+                    rb3.setClickable(true);
+                    rb4.setClickable(true);
+                    rb5.setClickable(true);
+                    rb6.setClickable(true);
+                    rb7.setClickable(true);
+                    rb8.setClickable(true);
+                    rb9.setClickable(true);
+                    rb10.setClickable(true);
+                    rb11.setClickable(true);
+                    rb12.setClickable(true);
+                    rb13.setClickable(true);
+                    rb14.setClickable(true);
+                    rb15.setClickable(true);
+                    checkBox1.setClickable(true);
+                    checkBox2.setClickable(true);
+                    checkBox3.setClickable(true);
+                    editText1.setEnabled(true);
+                    editText2.setEnabled(true);
+                    saveBtn.setText("Finish Editting");
+                }
+                else{
+                    setGender();
+                    setCampus();
+                    setWorkplace();
+                    setSmoke();
+                    setCook();
+                    setInstrument();
+                    setSleepLight();
+                    RoommateCount();
+                    SleepTime(editText1.getText().toString());
+                    getUpTime(editText2.getText().toString());
 
-                Map<String, Object> RoommateInfo = new HashMap<>();
-                RoommateInfo.put("Gender", gender);
-                RoommateInfo.put("Campus", campus);
-                RoommateInfo.put("WorkPlace", workintheroom);
-                RoommateInfo.put("Smoke", smoke);
-                RoommateInfo.put("Cook" , cook);
-                RoommateInfo.put("Instrument" , instrument);
-                RoommateInfo.put("Sleep Light" , sleeplight);
-                RoommateInfo.put("Roommate Count" , roommatecount);
-                RoommateInfo.put("Sleep Time" , sleeptime);
-                RoommateInfo.put("Get Up Time" , getuptime);
-                RoommateInfo.put("ID" , user.getUid());
-                
-                RoommateInfos.document(user.getUid()).set(RoommateInfo);
-                isRoommateCreated();
+                    Map<String, Object> RoommateInfo = new HashMap<>();
+                    RoommateInfo.put("Gender", gender);
+                    RoommateInfo.put("Campus", campus);
+                    RoommateInfo.put("WorkPlace", workintheroom);
+                    RoommateInfo.put("Smoke", smoke);
+                    RoommateInfo.put("Cook" , cook);
+                    RoommateInfo.put("Instrument" , instrument);
+                    RoommateInfo.put("Sleep Light" , sleeplight);
+                    RoommateInfo.put("Roommate Count" , roommatecount);
+                    RoommateInfo.put("Sleep Time" , sleeptime);
+                    RoommateInfo.put("Get Up Time" , getuptime);
+                    RoommateInfo.put("ID" , user.getUid());
+
+                    RoommateInfos.document(user.getUid()).set(RoommateInfo);
+                    isRoommateCreated();
+                }
             }
         });
         imageBtn.setOnClickListener(new View.OnClickListener() {
@@ -216,9 +263,7 @@ public class RoommatesInfo extends AppCompatActivity {
                     sleeptime = documentSnapshot.getData().get("Sleep Time").toString();
                     getuptime = documentSnapshot.getData().get("Get Up Time").toString();
 
-                    saveBtn.setText("Saved");
-                    saveBtn.setClickable(false);
-                    saveBtn.setFocusable(false);
+                    saveBtn.setText("Edit");
 
                     if(gender.equals("Man")){rb1.setChecked(true);}
                     else if(gender.equals("Woman")){rb2.setChecked(true);}
@@ -329,9 +374,5 @@ public class RoommatesInfo extends AppCompatActivity {
 
     public void getUpTime(String x){
         getuptime = x;
-    }
-
-    public void uploadSchedule(){
-
     }
 }
