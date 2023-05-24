@@ -1,3 +1,7 @@
+/**
+ The BookInfo class allows users to add, view, and delete book information.
+ The class handles data management related to book information.
+ */
 package com.example.unicorn;
 
 import androidx.annotation.Nullable;
@@ -54,15 +58,24 @@ public class BookInfo extends AppCompatActivity {
     Button deleteButton;
     AutoCompleteTextView actw;
     String[] books;
+
+    /**
+     * Initializes the BookInfo activity when it is created.
+     * Sets the layout, initializes variables and views, and sets click listeners for buttons.
+     * @param savedInstanceState The saved instance state bundle.
+     */
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_info);
 
+        // Initialize Firestore, Firebase Auth, and Firebase User
         firestore = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
+
+        // Assign view elements to variables
         imageview = findViewById(R.id.imageView5);
         radioButton17 = findViewById(R.id.radioButton17);
         radioButton18 = findViewById(R.id.radioButton18);
@@ -77,10 +90,12 @@ public class BookInfo extends AppCompatActivity {
         deleteButton = findViewById(R.id.deleteBtn);
         books = new String[50];
 
+        // Set up AutoCompleteTextView with book names
         setBooks();
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, books);
         actw.setAdapter(adapter);
 
+        // Set click listener for profile button
         profileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,6 +105,7 @@ public class BookInfo extends AppCompatActivity {
             }
         });
 
+        // Set click listener for delete button
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,17 +134,23 @@ public class BookInfo extends AppCompatActivity {
             }
         });
 
+        //Set click listener for create button.
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                // Retrieve the owner name, book name, author, price, and comments from the EditText fields.
                 setOwnerName(editText6.getText().toString());
                 setName(editText7.getText().toString());
                 setAuthor(editText8.getText().toString());
                 setPrice(editText9.getText().toString());
                 setComments(editText10.getText().toString());
+
+                // Determine the book type based on the selected radio button.
                 if(radioButton17.isChecked()){type = "Reading Book";}
                 else if(radioButton18.isChecked()){type = "Lecture Book";}
 
+                // Create a new HashMap to store the book information.
                 Map<String,Object> book = new HashMap<>();
                 book.put("Type" , type);
                 book.put("OwnerName" , ownerName);
@@ -138,8 +160,10 @@ public class BookInfo extends AppCompatActivity {
                 book.put("Comments" , comments);
                 book.put("ID" , user.getUid());
 
+                // Add the book to the Firestore collection "Books".
                 firestore.collection("Books").add(book);
 
+                // Reset UI elements and clear input fields.
                 radioButton17.setChecked(false);
                 radioButton18.setChecked(false);
                 editText6.setText("");
@@ -150,22 +174,43 @@ public class BookInfo extends AppCompatActivity {
             }
         });
     }
+
+    /**
+     * Sets the book owner for the book.
+     * @param x The book owner to be set for the book.
+     */
     public void setOwnerName(String x){
         ownerName = x;
     }
 
+    /**
+     * Sets the name for the book.
+     * @param x The name to be set for the book.
+     */
     public void setName(String x){
         name = x;
     }
 
+    /**
+     * Sets the author for the book.
+     * @param x The author to be set for the book.
+     */
     public void setAuthor(String x){
         author = x;
     }
 
+    /**
+     * Sets the price for the book.
+     * @param x The price to be set for the book.
+     */
     public void setPrice(String x){
         price = x;
     }
 
+    /**
+     * Sets the comments for the book.
+     * @param x The comments to be set for the book.
+     */
     public void setComments(String x){
         comments = x;
     }
