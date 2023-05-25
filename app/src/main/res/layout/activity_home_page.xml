@@ -76,11 +76,11 @@
 
     <Button
         android:id="@+id/button12"
-        android:layout_width="88dp"
-        android:layout_height="72dp"
+        android:layout_width="90dp"
+        android:layout_height="55dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="2dp"
-        app:icon="@android:drawable/ic_dialog_email"
+        app:icon="@drawable/account_group_outline"
         app:iconGravity="start"
         app:iconSize="45dp"
         app:layout_constraintEnd_toEndOf="parent"

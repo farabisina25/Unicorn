@@ -115,23 +115,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView65" />
 
-    <ImageButton
-        android:id="@+id/imageButton8"
-        android:layout_width="94dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="50dp"
-        android:background="@android:drawable/ic_dialog_email"
-        android:backgroundTint="#3F51B5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView66" />
-
     <TextView
         android:id="@+id/textView68"
-        android:layout_width="186dp"
-        android:layout_height="50dp"
+        android:layout_width="187dp"
+        android:layout_height="22dp"
         android:layout_marginTop="65dp"
         android:layout_marginEnd="55dp"
+        android:text="Tel No"
         android:textAlignment="center"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -167,4 +157,14 @@
         android:background="@drawable/home_circle"
         app:layout_constraintEnd_toEndOf="@+id/textView60"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/addfriend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="55dp"
+        android:text="Add Friend"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView66" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,16 +15,13 @@
         android:theme="@style/Theme.Material3.Light"
         tools:targetApi="31">
         <activity
+            android:name=".Friends"
+            android:exported="false" />
+        <activity
             android:name=".ShowProfile"
             android:exported="false" />
         <activity
             android:name=".EventsSubmenu2"
-            android:exported="false" />
-        <activity
-            android:name=".InnerChat"
-            android:exported="false" />
-        <activity
-            android:name=".Chat"
             android:exported="false" />
         <activity
             android:name=".RoommatesSubmenu"

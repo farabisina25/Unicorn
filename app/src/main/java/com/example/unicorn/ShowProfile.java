@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -16,11 +17,15 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class ShowProfile extends AppCompatActivity {
 
@@ -28,18 +33,20 @@ public class ShowProfile extends AppCompatActivity {
     FirebaseAuth mAuth;
     FirebaseUser user;
     DocumentReference docRef;
+    CollectionReference Friends;
     String Description;
     String NameSurname;
     String BirthDate;
     String Department;
     String ProfileShow;
+    String ID;
     TextView textView1;
     TextView textView2;
     TextView textView3;
     TextView textView4;
     TextView textView5;
     ImageButton homeBtn;
-    ImageButton chatBtn;
+    Button addfriend;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -50,6 +57,7 @@ public class ShowProfile extends AppCompatActivity {
         firestore = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
+        Friends = firestore.collection("Friends");
 
         textView1 = findViewById(R.id.textView61);
         textView2 = findViewById(R.id.textView63);
@@ -58,7 +66,7 @@ public class ShowProfile extends AppCompatActivity {
         textView5 = findViewById(R.id.textView68);
 
         homeBtn = findViewById(R.id.imageButton11);
-        chatBtn = findViewById(R.id.imageButton8);
+        addfriend = findViewById(R.id.addfriend);
 
         docRef = firestore.collection("Profiles").document(user.getUid());
         docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -111,15 +119,43 @@ public class ShowProfile extends AppCompatActivity {
             }
         });
 
-        chatBtn.setOnClickListener(new View.OnClickListener() {
+        addfriend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                docRef = firestore.collection("Profiles").document(user.getUid());
-                docRef.update("ChatProfile", NameSurname);
-                Intent intent = new Intent(getApplicationContext() , InnerChat.class);
-                startActivity(intent);
-                finish();
+                if(addfriend.getText().equals("Add Friend")){
+                    addfriend.setText("Waiting...");
+                    addfriend.setClickable(false);
+                    firestore.collection("Profiles").whereEqualTo("NameLastname", NameSurname).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@org.checkerframework.checker.nullness.qual.NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                for (QueryDocumentSnapshot document : task.getResult()){
+                                    docRef = firestore.collection("Profiles").document(document.getId());
+                                    docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                        @Override
+                                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                            if(documentSnapshot.exists()){
+                                                ID = documentSnapshot.getData().get("ID").toString();
+                                            }
+                                        }
+                                    });
+
+                                }
+                            }
+                        }
+                    }).addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            Map<String,Object> friendrequest = new HashMap<>();
+                            friendrequest.put("ID" , user.getUid());
+                            Friends.document(ID).set(friendrequest);
+                        }
+                    });
+                }
             }
         });
+    }
+    public void isFriend(){
+
     }
 }

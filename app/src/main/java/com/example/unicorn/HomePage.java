@@ -256,7 +256,7 @@ public class HomePage extends AppCompatActivity {
         button12.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext() , Chat.class);
+                Intent intent = new Intent(getApplicationContext() , Friends.class);
                 startActivity(intent);
                 finish();
             }
