@@ -306,13 +306,13 @@ public class RoommatesSubmenu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 textView1.setText(name1);
-                textView2.setText("%" + ((CountArray[0] / 14) * 100) + " Matching");
+                textView2.setText("%" + ((CountArray[0] * 100) / 14) + " Matching");
                 textView3.setText(name2);
-                textView4.setText("%" + ((CountArray[1] / 14) * 100) + " Matching");
+                textView4.setText("%" + ((CountArray[1] * 100) / 14) + " Matching");
                 textView5.setText(name3);
-                textView6.setText("%" + ((CountArray[2] / 14) * 100) + " Matching");
+                textView6.setText("%" + ((CountArray[2] * 100) / 14) + " Matching");
                 textView7.setText(name4);
-                textView8.setText("%" + ((CountArray[3] / 14) * 100) + " Matching");
+                textView8.setText("%" + ((CountArray[3] * 100) / 14) + " Matching");
             }
         });
         homepagebutton.setOnClickListener(new View.OnClickListener() {
