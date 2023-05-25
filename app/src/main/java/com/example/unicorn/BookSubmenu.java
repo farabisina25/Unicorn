@@ -1,3 +1,6 @@
+/**
+ * Represents the activity for displaying book details in the submenu.
+ */
 package com.example.unicorn;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -56,17 +59,23 @@ public class BookSubmenu extends AppCompatActivity {
     String BookPrice;
     String OwnerName;
 
+    /**
+     * Initializes the UI elements, retrieves the books, and sets up the event listeners.
+     * @param savedInstanceState The saved instance state of the activity.
+     */
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_submenu);
 
+        // Initialize Firebase Firestore and Firebase Authentication
         firestore = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
         Books = firestore.collection("Books");
 
+        // Assign view elements to variables
         homeBtn = findViewById(R.id.imageButton3);
         searchBtn  =findViewById(R.id.button10);
         profileBtn = findViewById(R.id.imageButton5);
@@ -87,11 +96,13 @@ public class BookSubmenu extends AppCompatActivity {
 
         books = new String[50];
 
+        // Retrieve the list of books and set up the adapter for the AutoCompleteTextView
         setBooks();
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, books);
         actextView.setAdapter(adapter);
 
+        // Set up the event listeners for the buttons
         homeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,6 +115,8 @@ public class BookSubmenu extends AppCompatActivity {
         profileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                // Update the user's profile and navigate to the profile page
                 docRef = firestore.collection("Profiles").document(user.getUid());
                 docRef.update("ShowProfile", textView11.getText().toString());
                 Intent intent = new Intent(getApplicationContext() , ShowProfile.class);
@@ -115,6 +128,8 @@ public class BookSubmenu extends AppCompatActivity {
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //display the details of the selected book
                 BookName = actextView.getText().toString();
                 if(BookName != null){
                     textView1.setVisibility(View.VISIBLE);
@@ -131,6 +146,9 @@ public class BookSubmenu extends AppCompatActivity {
         });
     }
 
+    /**
+     * Retrieves the list of books from the Firestore database and populates the array.
+     */
     public void setBooks(){
         firestore.collection("Books")
                 .get()
@@ -155,6 +173,11 @@ public class BookSubmenu extends AppCompatActivity {
         }
     }
 
+    /**
+     * Retrieves the details of the selected book from the Firestore database
+      and updates the corresponding TextView elements with the retrieved data.
+     * @param name The name of the book.
+     */
     public void getBook(String name){
         firestore.collection("Books")
                 .whereEqualTo("Name", name)
@@ -169,6 +192,8 @@ public class BookSubmenu extends AppCompatActivity {
                                     @Override
                                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                                         if(documentSnapshot.exists()){
+
+                                            // Get book details from Firestore document
                                             BookType = documentSnapshot.getData().get("Type").toString();
                                             BookName = documentSnapshot.getData().get("Name").toString();
                                             BookAuthor = documentSnapshot.getData().get("Author").toString();
@@ -176,6 +201,8 @@ public class BookSubmenu extends AppCompatActivity {
                                             BookComments = documentSnapshot.getData().get("Comments").toString();
                                             OwnerName = documentSnapshot.getData().get("OwnerName").toString();
 
+
+                                            // Update the corresponding TextView elements with the retrieved data.
                                             textView9.setText(BookType);
                                             textView6.setText(BookName);
                                             textView7.setText(BookAuthor);

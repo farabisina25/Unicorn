@@ -1,3 +1,8 @@
+/**
+ * This class represents the RoommatesInfo activity, where users can provide information about their roommates.
+ * It allows users to set various preferences such as gender, campus, work, smoking, cooking, instruments, sleep habits, etc.
+ * The information is stored in Firebase Firestore for further processing and matching with potential roommates.
+ */
 package com.example.unicorn;
 
 import androidx.annotation.Nullable;
@@ -77,6 +82,7 @@ public class RoommatesInfo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_roommates_info);
 
+        // Initialize Firebase components
         firestore = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
@@ -90,6 +96,7 @@ public class RoommatesInfo extends AppCompatActivity {
 
         Email = user.getEmail();
 
+        // Initialize radio buttons, checkboxes, and edit texts
         rb1 = findViewById(R.id.rb1);
         rb2 = findViewById(R.id.rb2);
         rb3 = findViewById(R.id.rb3);
@@ -113,11 +120,14 @@ public class RoommatesInfo extends AppCompatActivity {
         editText1 = findViewById(R.id.editTextText6);
         editText2 = findViewById(R.id.editTextText7);
 
+        // Check if roommate information already exists for the user
         isRoommateCreated();
 
+        // Profile button click listener
         profileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Redirect to the profile activity
                 Intent intent = new Intent(getApplicationContext() , Profile.class);
                 startActivity(intent);
                 finish();
@@ -127,6 +137,8 @@ public class RoommatesInfo extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(saveBtn.getText().toString().equals("Finish Editting")){
+
+                    // Save the selected preferences to variables
                     setGender();
                     setCampus();
                     setWorkplace();
@@ -138,6 +150,7 @@ public class RoommatesInfo extends AppCompatActivity {
                     SleepTime(editText1.getText().toString());
                     getUpTime(editText2.getText().toString());
 
+                    // Update the preferences in Firestore
                     docRef = firestore.collection("RoommateInfos").document(user.getUid());
                     docRef.update("Gender", gender);
                     docRef.update("Campus", campus);
@@ -149,10 +162,14 @@ public class RoommatesInfo extends AppCompatActivity {
                     docRef.update("Roommate Count" , roommatecount);
                     docRef.update("Sleep Time" , sleeptime);
                     docRef.update("Get Up Time" , getuptime);
+
+                    // Update the button text and check if roommate information is created
                     saveBtn.setText("Edit");
                     isRoommateCreated();
                 }
                 else if(saveBtn.getText().toString().equals("Edit")){
+
+                    // Clear the selected preferences and enable the input fields.
                     rb1.setChecked(false);
                     rb2.setChecked(false);
                     rb3.setChecked(false);
@@ -196,6 +213,8 @@ public class RoommatesInfo extends AppCompatActivity {
                     saveBtn.setText("Finish Editting");
                 }
                 else{
+
+                    // Save the selected preferences to variables.
                     setGender();
                     setCampus();
                     setWorkplace();
@@ -207,6 +226,7 @@ public class RoommatesInfo extends AppCompatActivity {
                     SleepTime(editText1.getText().toString());
                     getUpTime(editText2.getText().toString());
 
+                    // Create a map of RoommateInfo data
                     Map<String, Object> RoommateInfo = new HashMap<>();
                     RoommateInfo.put("Gender", gender);
                     RoommateInfo.put("Campus", campus);
@@ -228,6 +248,8 @@ public class RoommatesInfo extends AppCompatActivity {
         imageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                // Open the gallery to select an image
                 Intent iGallery = new Intent(Intent.ACTION_PICK);
                 iGallery.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(iGallery, GALLERY_REC_CODE);
@@ -241,17 +263,25 @@ public class RoommatesInfo extends AppCompatActivity {
 
         if(resultCode == RESULT_OK){
             if(requestCode == GALLERY_REC_CODE){
+
+                // Set the selected image as the ImageView's source
                 imageview.setImageURI(data.getData());
             }
         }
     }
 
+    /**
+     * Checks if a roommate profile is created for the current user and retrieves the information if it exists.
+     * The method queries the Firestore database for the user's roommate information and updates the corresponding UI elements.
+     */
     public void isRoommateCreated(){
         docRef = firestore.collection("RoommateInfos").document(user.getUid());
         docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 if(documentSnapshot.exists()){
+
+                    // Retrieve the roommate information from the document
                     gender = documentSnapshot.getData().get("Gender").toString();
                     campus = documentSnapshot.getData().get("Campus").toString();
                     workintheroom = documentSnapshot.getData().get("WorkPlace").toString();
@@ -263,8 +293,10 @@ public class RoommatesInfo extends AppCompatActivity {
                     sleeptime = documentSnapshot.getData().get("Sleep Time").toString();
                     getuptime = documentSnapshot.getData().get("Get Up Time").toString();
 
+                    // Update the UI elements with the retrieved data
                     saveBtn.setText("Edit");
 
+                    // Set the appropriate RadioButtons based on the retrieved data.
                     if(gender.equals("Man")){rb1.setChecked(true);}
                     else if(gender.equals("Woman")){rb2.setChecked(true);}
 
@@ -320,41 +352,67 @@ public class RoommatesInfo extends AppCompatActivity {
 
     }
 
+    /**
+     * Sets the type of 'gender' based on the selected RadioButton.
+     */
     public void setGender(){
         if(rb1.isChecked()){gender = "Man";}
         else if(rb2.isChecked()){gender = "Woman";}
     }
 
+    /**
+     * Sets the type of 'campus' based on the selected RadioButton.
+     */
     public void setCampus(){
         if(rb3.isChecked()){campus = "Main";}
         else if(rb4.isChecked()){campus = "East";}
     }
 
+    /**
+     * Sets the place of work based on the selected RadioButton.
+     */
     public void setWorkplace(){
         if(rb5.isChecked()){workintheroom = "Yes";}
         else if(rb6.isChecked()){workintheroom = "No";}
         else if(rb7.isChecked()){workintheroom = "Sometimes";}
     }
 
+    /**
+     * Sets the smoking status based on the selected RadioButton.
+     */
     public void setSmoke(){
         if(rb8.isChecked()){smoke = "Yes";}
         else if(rb9.isChecked()){smoke = "No";}
     }
 
+    /**
+     * Sets the status of 'cook' based on the selected RadioButton.
+     */
     public void setCook(){
         if(rb10.isChecked()){cook = "Yes";}
         else if(rb11.isChecked()){cook = "No";}
     }
 
+    /**
+     * Sets the status of 'instrument' based on the selected RadioButton.
+     */
     public void setInstrument(){
         if(rb12.isChecked()){instrument = "Yes";}
         else if(rb13.isChecked()){instrument = "No";}
     }
 
+    /**
+     * Sets the status of 'sleep' based on the selected RadioButton.
+     */
     public void setSleepLight(){
         if(rb14.isChecked()){sleeplight = "Yes";}
         else if(rb15.isChecked()){sleeplight = "No";}
     }
+
+
+    /**
+     * Sets the count of roommates based on the selected CheckBox.
+     */
 
     public void RoommateCount(){
         if(checkBox1.isChecked()){
@@ -368,10 +426,19 @@ public class RoommatesInfo extends AppCompatActivity {
         }
     }
 
+    /**
+     * Sets the sleep time
+     * @param x sleep time.
+     */
     public void SleepTime(String x){
         sleeptime = x;
     }
 
+
+    /**
+     * Sets the get up time
+     * @param x get up time.
+     */
     public void getUpTime(String x){
         getuptime = x;
     }
