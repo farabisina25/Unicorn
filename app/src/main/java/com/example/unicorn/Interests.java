@@ -30,6 +30,7 @@ public class Interests extends AppCompatActivity {
     FirebaseUser user;
     DocumentReference docRef;
     CollectionReference Interests;
+    CollectionReference RoommateInfos;
     ImageButton profileBtn;
     Button musicsBtn;
     Button sportsBtn;
@@ -90,6 +91,7 @@ public class Interests extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
         Interests = firestore.collection("Interests");
+        RoommateInfos = firestore.collection("RoommateInfos");
 
         profileBtn = findViewById(R.id.imageButton10);
         musicsBtn = findViewById(R.id.button15);
@@ -165,8 +167,12 @@ public class Interests extends AppCompatActivity {
         for(int i = 0 ; i < musicsInputs.length; i++){
             interest.put("Music" + i , musicsInputs[i]);
         }
-
         Interests.document(user.getUid()).set(interest);
+        RoommateInfos.document(user.getUid()).update("Music1" , musicsInputs[0]);
+        musicsBtn.setText("Saved");
+        musicsBtn.setFocusable(false);
+        musicsBtn.setClickable(false);
+        editText.setEnabled(false);
     }
 
     public void setSports(){
@@ -179,6 +185,11 @@ public class Interests extends AppCompatActivity {
         }
 
         Interests.document(user.getUid()).set(interest);
+        RoommateInfos.document(user.getUid()).update("Sport1" , sportsInputs[0]);
+        sportsBtn.setText("Saved");
+        sportsBtn.setFocusable(false);
+        sportsBtn.setClickable(false);
+        editText1.setEnabled(false);
     }
 
 
@@ -192,6 +203,11 @@ public class Interests extends AppCompatActivity {
         }
 
         Interests.document(user.getUid()).set(interest);
+        RoommateInfos.document(user.getUid()).update("Book1" , booksInputs[0]);
+        booksBtn.setText("Saved");
+        booksBtn.setFocusable(false);
+        booksBtn.setClickable(false);
+        editText2.setEnabled(false);
     }
 
     public void setClubs(){
@@ -204,6 +220,11 @@ public class Interests extends AppCompatActivity {
         }
 
         Interests.document(user.getUid()).set(interest);
+        RoommateInfos.document(user.getUid()).update("Club1" , clubsInputs[0]);
+        clubsBtn.setText("Saved");
+        clubsBtn.setFocusable(false);
+        clubsBtn.setClickable(false);
+        editText3.setEnabled(false);
     }
 
     public void isInterestCreated(){

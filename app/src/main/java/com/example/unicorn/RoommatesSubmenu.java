@@ -69,6 +69,14 @@ public class RoommatesSubmenu extends AppCompatActivity {
     String sleeptime;
     String getuptime;
     String ID;
+    String music1;
+    String club1;
+    String book1;
+    String sport1;
+    String music2;
+    String club2;
+    String book2;
+    String sport2;
     String gender2;
     String campus2;
     String workintheroom2;
@@ -133,6 +141,10 @@ public class RoommatesSubmenu extends AppCompatActivity {
                                     roommatecount = documentSnapshot.getData().get("Roommate Count").toString();
                                     sleeptime = documentSnapshot.getData().get("Sleep Time").toString();
                                     getuptime = documentSnapshot.getData().get("Get Up Time").toString();
+                                    music1 = documentSnapshot.getData().get("Music1").toString();
+                                    sport1 = documentSnapshot.getData().get("Sport1").toString();
+                                    book1 = documentSnapshot.getData().get("Book1").toString();
+                                    club1 = documentSnapshot.getData().get("Club1").toString();
                                 }
                             }
                         });
@@ -165,6 +177,10 @@ public class RoommatesSubmenu extends AppCompatActivity {
                                             roommatecount2 = documentSnapshot.getData().get("Roommate Count").toString();
                                             sleeptime2 = documentSnapshot.getData().get("Sleep Time").toString();
                                             getuptime2 = documentSnapshot.getData().get("Get Up Time").toString();
+                                            music2 = documentSnapshot.getData().get("Music1").toString();
+                                            sport2 = documentSnapshot.getData().get("Sport1").toString();
+                                            book2 = documentSnapshot.getData().get("Book1").toString();
+                                            club2 = documentSnapshot.getData().get("Club1").toString();
                                             ids[i] = documentSnapshot.getData().get("ID").toString();
                                             if (campus.equals(campus2)) {
                                                 count++;
@@ -191,6 +207,18 @@ public class RoommatesSubmenu extends AppCompatActivity {
                                                 count++;
                                             }
                                             if (getuptime.equals(getuptime2)) {
+                                                count++;
+                                            }
+                                            if (music1.equals(music2)) {
+                                                count++;
+                                            }
+                                            if (sport1.equals(sport2)) {
+                                                count++;
+                                            }
+                                            if (book1.equals(book2)) {
+                                                count++;
+                                            }
+                                            if (club1.equals(club2)) {
                                                 count++;
                                             }
                                             if (!gender.equals(gender2)) {
@@ -278,13 +306,13 @@ public class RoommatesSubmenu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 textView1.setText(name1);
-                textView2.setText("%" + (CountArray[0] * 10) + " Matching");
+                textView2.setText("%" + ((CountArray[0] / 14) * 100) + " Matching");
                 textView3.setText(name2);
-                textView4.setText("%" + (CountArray[1] * 10) + " Matching");
+                textView4.setText("%" + ((CountArray[1] / 14) * 100) + " Matching");
                 textView5.setText(name3);
-                textView6.setText("%" + (CountArray[2] * 10) + " Matching");
+                textView6.setText("%" + ((CountArray[2] / 14) * 100) + " Matching");
                 textView7.setText(name4);
-                textView8.setText("%" + (CountArray[3] * 10) + " Matching");
+                textView8.setText("%" + ((CountArray[3] / 14) * 100) + " Matching");
             }
         });
         homepagebutton.setOnClickListener(new View.OnClickListener() {
