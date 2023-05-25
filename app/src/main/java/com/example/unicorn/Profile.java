@@ -61,6 +61,7 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        //Initialize Firebase components.
         firestore = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
@@ -68,6 +69,7 @@ public class Profile extends AppCompatActivity {
 
         Email = user.getEmail();
 
+        //Initialize UI elements.
         imageview = findViewById(R.id.imageView);
         textview1 = findViewById(R.id.textView1);
         textview2 = findViewById(R.id.textView2);
@@ -91,6 +93,8 @@ public class Profile extends AppCompatActivity {
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //Open roommate activity.
                 Intent intent = new Intent(getApplicationContext() , RoommatesInfo.class);
                 startActivity(intent);
                 finish();
@@ -100,6 +104,8 @@ public class Profile extends AppCompatActivity {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //Open bookinfo activity.
                 Intent intent = new Intent(getApplicationContext() , BookInfo.class);
                 startActivity(intent);
                 finish();
@@ -109,6 +115,8 @@ public class Profile extends AppCompatActivity {
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //Open Interests activity.
                 Intent intent = new Intent(getApplicationContext() , Interests.class);
                 startActivity(intent);
                 finish();
@@ -118,6 +126,8 @@ public class Profile extends AppCompatActivity {
         button4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //Open Activity activity.
                 Intent intent = new Intent(getApplicationContext() , Activity.class);
                 startActivity(intent);
                 finish();
@@ -127,6 +137,8 @@ public class Profile extends AppCompatActivity {
         button5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //Update profile information.
                 if(button5.getText().toString().equals("Edit")){
                     setDescription(editText1.getText().toString());
                     setNameSurname(editText2.getText().toString());
