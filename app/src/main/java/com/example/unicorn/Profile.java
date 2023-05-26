@@ -35,7 +35,7 @@ public class Profile extends AppCompatActivity {
     String NameSurname;
     String BirthDate;
     String Department;
-
+    String Telno;
     ImageView imageview;
     TextView textview1;
     TextView textview2;
@@ -45,8 +45,8 @@ public class Profile extends AppCompatActivity {
     EditText editText1;
     EditText editText2;
     EditText editText3;
-
     EditText editText4;
+    EditText editText5;
     Button button1;
     Button button2;
     Button button3;
@@ -78,6 +78,7 @@ public class Profile extends AppCompatActivity {
         editText2 = findViewById(R.id.editText2);
         editText3 = findViewById(R.id.editText3);
         editText4 = findViewById(R.id.editText4);
+        editText5 = findViewById(R.id.telno);
 
         button1 = findViewById(R.id.button1);
         button2 = findViewById(R.id.button2);
@@ -132,17 +133,20 @@ public class Profile extends AppCompatActivity {
                     setNameSurname(editText2.getText().toString());
                     setBirth(editText3.getText().toString());
                     setDepartment(editText4.getText().toString());
+                    setTelno(editText5.getText().toString());
 
                     docRef = firestore.collection("Profiles").document(user.getUid());
                     docRef.update("Description", Description);
                     docRef.update("NameLastname", NameSurname);
                     docRef.update("Birth", BirthDate);
                     docRef.update("Department", Department);
+                    docRef.update("Telno", Telno);
                 }
                     setDescription(editText1.getText().toString());
                     setNameSurname(editText2.getText().toString());
                     setBirth(editText3.getText().toString());
                     setDepartment(editText4.getText().toString());
+                    setTelno(editText5.getText().toString());
 
                     Map<String,Object> profile = new HashMap<>();
                     profile.put("Email" , Email);
@@ -150,9 +154,9 @@ public class Profile extends AppCompatActivity {
                     profile.put("NameLastname" , NameSurname);
                     profile.put("Birth" , BirthDate);
                     profile.put("Department" , Department);
+                    profile.put("Telno" , Telno);
                     profile.put("ID" , user.getUid());
                     profile.put("ShowProfile" , "");
-                    profile.put("ChatProfile" , "");
 
                     Profiles.document(user.getUid()).set(profile);
 
@@ -200,11 +204,13 @@ public class Profile extends AppCompatActivity {
                     Description = documentSnapshot.getData().get("Description").toString();
                     BirthDate = documentSnapshot.getData().get("Birth").toString();
                     Department = documentSnapshot.getData().get("Department").toString();
+                    Telno = documentSnapshot.getData().get("Telno").toString();
 
                     editText1.setText(Description);
                     editText2.setText(NameSurname);
                     editText3.setText(BirthDate);
                     editText4.setText(Department);
+                    editText5.setText(Telno);
 
                     button5.setText("Edit");
                 }
@@ -228,8 +234,7 @@ public class Profile extends AppCompatActivity {
         Department = x;
     }
 
-    public void showProfile(){
-
+    public void setTelno(String x){
+        Telno = x;
     }
-
 }

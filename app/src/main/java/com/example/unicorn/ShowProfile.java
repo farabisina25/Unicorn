@@ -113,10 +113,6 @@ public class ShowProfile extends AppCompatActivity {
                 });
             }
         });
-
-
-
-
         homeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -164,9 +160,20 @@ public class ShowProfile extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()){
                         if((document.getData().get("ID2").toString()).equals(user.getUid())){
+                            DocumentReference docRef = firestore.collection("Profiles").document(document.getData().get("ID1").toString());
+                            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        DocumentSnapshot document = task.getResult();
+                                        if (document.exists()) {
+                                            textView5.setText(document.getData().get("Telno").toString());
+                                        }
+                                    }
+                                }
+                            });
                             addfriend.setText("Friend");
                             addfriend.setClickable(false);
-                            textView5.setText("05457345906");
                         }
                     }
                 }
