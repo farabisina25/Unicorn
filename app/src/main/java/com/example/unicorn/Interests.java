@@ -61,7 +61,7 @@ public class Interests extends AppCompatActivity {
                     "Volleyball", "Baseball", "Basketball", "Football", "Cricket", "Golf", "Tennis",
                     "Hockey", "American Football", "Rugby", "Boxing", "Judo", "Karate", "Taekwondo",
                     "Swimming","Diving","Sailing","Water Polo","Canoeing", "Badminton", "Squash", "Table Tennis",
-                    "Athletics", "Cycling", "Gymnastics", "Skateboarding", "Surfing"
+                    "Athletics", "Cycling", "Gymnastics", "Skateboarding","Surfing"
             };
 
     public String[] books = new String[]
