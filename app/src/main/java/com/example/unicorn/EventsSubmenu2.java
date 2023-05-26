@@ -57,6 +57,7 @@ public class EventsSubmenu2 extends AppCompatActivity {
     String Place;
     String Description;
     String userName;
+    String ID;
     String[] activities = new String[50];
     @SuppressLint("MissingInflatedId")
     @Override
@@ -219,12 +220,13 @@ public class EventsSubmenu2 extends AppCompatActivity {
                                             Date = documentSnapshot.getData().get("Date").toString();
                                             Place = documentSnapshot.getData().get("Place").toString();
                                             Description = documentSnapshot.getData().get("Description").toString();
+                                            ID = documentSnapshot.getData().get("ID").toString();
 
                                             textView5.setText(Name);
                                             textView6.setText(Date);
                                             textView7.setText(Place);
                                             textView8.setText(Description);
-                                            setName();
+                                            setName(ID);
                                         }
                                     }
                                 });
@@ -235,9 +237,9 @@ public class EventsSubmenu2 extends AppCompatActivity {
                 });
     }
 
-    public void setName(){
+    public void setName(String id){
         firestore.collection("Profiles")
-                .whereEqualTo("ID", user.getUid())
+                .whereEqualTo("ID", id)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

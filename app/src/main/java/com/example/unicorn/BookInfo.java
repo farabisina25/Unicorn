@@ -76,7 +76,6 @@ public class BookInfo extends AppCompatActivity {
         user = mAuth.getCurrentUser();
 
         // Assign view elements to variables
-        imageview = findViewById(R.id.imageView5);
         radioButton17 = findViewById(R.id.radioButton17);
         radioButton18 = findViewById(R.id.radioButton18);
         editText6 = findViewById(R.id.editText6);

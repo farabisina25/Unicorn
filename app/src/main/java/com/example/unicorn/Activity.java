@@ -14,6 +14,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -22,6 +24,8 @@ import java.util.Map;
 public class Activity extends AppCompatActivity {
 
     FirebaseFirestore firestore;
+    FirebaseAuth mAuth;
+    FirebaseUser user;
     String name;
     String place;
     String date;
@@ -51,6 +55,8 @@ public class Activity extends AppCompatActivity {
         setContentView(R.layout.activity_activities);
 
         firestore = FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
 
         // Assign view elements to variables
         imagebutton2 = findViewById(R.id.profileBtn2);
@@ -82,6 +88,7 @@ public class Activity extends AppCompatActivity {
                 activity.put("Place", place);
                 activity.put("Description", description);
                 activity.put("Type" , type);
+                activity.put("ID" , user.getUid());
 
                 // Add the activity to the Firestore collection
                 firestore.collection("Activities").add(activity);

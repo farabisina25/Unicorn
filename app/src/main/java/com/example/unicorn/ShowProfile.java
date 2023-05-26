@@ -40,6 +40,7 @@ public class ShowProfile extends AppCompatActivity {
     String Department;
     String ProfileShow;
     String ID;
+    String name;
     TextView textView1;
     TextView textView2;
     TextView textView3;
@@ -57,7 +58,7 @@ public class ShowProfile extends AppCompatActivity {
         firestore = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
-        Friends = firestore.collection("Friends");
+        Friends = firestore.collection("FriendRequests");
 
         textView1 = findViewById(R.id.textView61);
         textView2 = findViewById(R.id.textView63);
@@ -93,12 +94,15 @@ public class ShowProfile extends AppCompatActivity {
                                             BirthDate = documentSnapshot.getData().get("Birth").toString();
                                             Department = documentSnapshot.getData().get("Department").toString();
                                             Description = documentSnapshot.getData().get("Description").toString();
+                                            ID = documentSnapshot.getData().get("ID").toString();
 
                                             textView1.setText(NameSurname);
                                             textView2.setText(BirthDate);
                                             textView3.setText(Department);
                                             textView4.setText(Description);
-                                            textView5.setText("Send Message to " + NameSurname);
+
+                                            isFriendRequest(ID);
+                                            isFriend(ID);
                                         }
                                     }
                                 });
@@ -109,6 +113,9 @@ public class ShowProfile extends AppCompatActivity {
                 });
             }
         });
+
+
+
 
         homeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,40 +129,63 @@ public class ShowProfile extends AppCompatActivity {
         addfriend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(addfriend.getText().equals("Add Friend")){
                     addfriend.setText("Waiting...");
                     addfriend.setClickable(false);
-                    firestore.collection("Profiles").whereEqualTo("NameLastname", NameSurname).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    firestore.collection("Profiles").whereEqualTo("ID", user.getUid()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
                         public void onComplete(@org.checkerframework.checker.nullness.qual.NonNull Task<QuerySnapshot> task) {
                             if (task.isSuccessful()) {
-                                for (QueryDocumentSnapshot document : task.getResult()){
+                                for (QueryDocumentSnapshot document : task.getResult()) {
                                     docRef = firestore.collection("Profiles").document(document.getId());
                                     docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                         @Override
                                         public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                            if(documentSnapshot.exists()){
-                                                ID = documentSnapshot.getData().get("ID").toString();
+                                            if (documentSnapshot.exists()) {
+                                                name = documentSnapshot.getData().get("NameLastname").toString();
+                                                Map<String,Object> friendrequest = new HashMap<>();
+                                                friendrequest.put("ID1" , ID);
+                                                friendrequest.put("ID2" , user.getUid());
+                                                friendrequest.put("Name" , name);
+                                                Friends.add(friendrequest);
                                             }
                                         }
                                     });
-
                                 }
                             }
                         }
-                    }).addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                            Map<String,Object> friendrequest = new HashMap<>();
-                            friendrequest.put("ID" , user.getUid());
-                            Friends.document(ID).set(friendrequest);
-                        }
                     });
+                }
+        });
+    }
+    public void isFriend(String id){
+        firestore.collection("Friends").whereEqualTo("ID1", id).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@org.checkerframework.checker.nullness.qual.NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()){
+                        if((document.getData().get("ID2").toString()).equals(user.getUid())){
+                            addfriend.setText("Friend");
+                            addfriend.setClickable(false);
+                            textView5.setText("05457345906");
+                        }
+                    }
                 }
             }
         });
     }
-    public void isFriend(){
-
+    public void isFriendRequest(String id){
+        firestore.collection("FriendRequests").whereEqualTo("ID1", id).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@org.checkerframework.checker.nullness.qual.NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()){
+                        if((document.getData().get("ID2").toString()).equals(user.getUid())){
+                            addfriend.setText("Waiting...");
+                            addfriend.setClickable(false);
+                        }
+                    }
+                }
+            }
+        });
     }
 }
