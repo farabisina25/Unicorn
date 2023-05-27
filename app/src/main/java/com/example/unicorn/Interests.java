@@ -49,6 +49,7 @@ public class Interests extends AppCompatActivity {
     String[] booksInputs;
     String[] clubsInputs;
 
+    // Some Music Types
     public String[] musicTypes = new String[]
             {
                     "Rock", "Pop", "RB", "Electronic", "Jazz", "Folk", "Reggae", "Techno", "Funk",
@@ -56,6 +57,7 @@ public class Interests extends AppCompatActivity {
                     "Country", "Punk", "Heavy metal"
             };
 
+    // Some Sports Types
     public String[] sports = new String[]
             {
                     "Volleyball", "Baseball", "Basketball", "Football", "Cricket", "Golf", "Tennis",
@@ -64,6 +66,7 @@ public class Interests extends AppCompatActivity {
                     "Athletics", "Cycling", "Gymnastics", "Skateboarding","Surfing"
             };
 
+    // Some Books Types
     public String[] books = new String[]
             {
                     "Action", "Adventure", "Classics", "Comic", "Graphical Novel", "Detective and Mystery",
@@ -71,7 +74,7 @@ public class Interests extends AppCompatActivity {
                     "Suspense and Thrillers", "Biographies and Autobiographies", "Cookbooks", "Essays",
                     "History", "Memoir", "Poetry", "Self-Help", "True Crime"
             };
-
+    // Some Clubs Types
     public String[] clubs = new String[]
             {
                     "ACM Club", "Aikido Society", "American Culture Society", "Animals' Friends Club", "Archaeology Club",
